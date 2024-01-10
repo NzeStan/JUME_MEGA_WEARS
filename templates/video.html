@@ -1,0 +1,23 @@
+{% extends "_base.html" %}
+
+{% block content %}
+
+
+
+<div class="grid grid-auto-fit-[100px] gap-10">
+    {% for video in object_list %}
+    <div>
+        <a href="{% url 'detail_video' video.pk %}">
+            <video class="w-full" controls>
+                <source src="{{video.video.url}}" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </a>
+    </div>
+    {% endfor %}
+
+</div>
+{% include "pagination.html" with page=page_obj %}
+
+
+{% endblock content %}

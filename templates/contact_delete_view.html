@@ -1,0 +1,18 @@
+{% extends "_base.html" %}
+
+{% block content %}
+
+<form action="" method="post">
+    {% csrf_token %}
+    <p>Are you sure you want to delete message?</p>
+    <div class="mb-6">
+        <button type="submit"
+            class="h-10 px-5 text-indigo-100 bg-indigo-700 rounded-lg transition-colors duration-150 focus:shadow-outline hover:bg-indigo-800 ">
+            Confirm
+        </button>
+    </div>
+</form>
+
+
+
+{% endblock content %}
