@@ -7,12 +7,18 @@
 <div class="grid grid-auto-fit-[100px] gap-10">
     {% for inspo in object_list %}
     <div>
-        <a href="{% url 'detail_inspo' inspo.pk %}"><img class="min-h-full  rounded-lg" src="{{inspo.inspo.url}}"
-                alt=""></a>
+        <a href="{{inspo.get_absolute_url}}"><img class="min-h-full  rounded-lg" src="{{inspo.inspo.url}}" alt=""></a>
+        <a class="grid justify-center" href="https://wa.link/hgadxf"><img width="100px" height="100px"
+                src="https://res.cloudinary.com/dhhaiy58r/image/upload/v1704207702/WhatsApp-Logo.wine_nbsnhs.png"
+                alt="whatsapp_LOGO"></a>
     </div>
     {% endfor %}
 
 </div>
+<br>
+<br>
+<br>
+<br>
 {% include "pagination.html" with page=page_obj %}
 
 

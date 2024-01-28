@@ -1,10 +1,58 @@
 {% extends "_base.html" %}
 {% block title %}Sign Up{% endblock title %}
 {% block content %}
-<h2>Sign Up</h2>
-<form method="post">
+<h2 class="grid justify-center">Sign Up</h2>
+<form method="post" class="max-w-sm mx-auto">
     {% csrf_token %}
-    {{ form }}
-    <button type="submit">Sign Up</button>
+    <div class="mb-5">
+        <label for="id_email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your Email</label>
+        <input type="email" name="email" placeholder="Email address" autocomplete="email" maxlength="320" required=""
+            id="id_email"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+    </div>
+    <div class="mb-5">
+        <label for="id_username" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Username</label>
+        <input type="text" name="username" placeholder="Username" autocomplete="username" minlength="1" maxlength="150"
+            required="" id="id_username"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+    </div>
+    <div class="mb-5">
+        <label for="id_phone_number" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Phone
+            Number</label>
+        <input type="text" name="phone_number" placeholder="Phone Number" maxlength="11" required=""
+            id="id_phone_number"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+    </div>
+    <div class="mb-5">
+        <label for="id_first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">First
+            Name</label>
+        <input type="text" name="first_name" placeholder="First Name" maxlength="50" required="" id="id_first_name"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+    </div>
+    <div class="mb-5">
+        <label for="id_last_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Last Name</label>
+        <input type="text" name="last_name" placeholder="First Name" maxlength="50" required="" id="id_last_name"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+    </div>
+    <div class="mb-5">
+        <label for="id_password1" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password:</label>
+        <div id="id_password1_helptext" class="helptext">
+            <ul>
+                <li>Your password can’t be too similar to your other personal information.</li>
+                <li>Your password must contain at least 8 characters.</li>
+                <li>Your password can’t be a commonly used password.</li>
+                <li>Your password can’t be entirely numeric.</li>
+            </ul>
+        </div>
+        <input type="password" name="password1" placeholder="Password" autocomplete="new-password" required=""
+            aria-describedby="id_password1_helptext" id="id_password1"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+    </div>
+    <br>
+    <button type="submit"
+        class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Sign
+        Up</button>
 </form>
+
+
 {% endblock content %}

@@ -1,5 +1,6 @@
 from django.db import models
 from django.urls import reverse
+from django.contrib.auth import get_user_model
 
 
 # Create your models here.
@@ -18,3 +19,20 @@ class Product(models.Model):
 
     def get_absolute_url(self):
         return reverse("nysc_detail", args=[str(self.id)])
+
+
+class Measurement(models.Model):
+    chest = models.IntegerField()
+    shoulder = models.IntegerField()
+    sleeve_length = models.IntegerField()
+    waist = models.IntegerField()
+    thigh = models.IntegerField()
+    trouser_length = models.IntegerField()
+
+    def get_absolute_url(self):
+        return reverse("update_measurement", args=[str(self.id)])
+
+    def save(self, *args, **kwargs):
+        if self.__class__.objects.count():
+            self.pk = self.__class__.objects.first().pk
+        super().save(*args, **kwargs)

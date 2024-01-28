@@ -49,7 +49,6 @@ INSTALLED_APPS = [
     "allauth.account",
     "cloudinary_storage",
     "cloudinary",
-    # local
     "accounts.apps.AccountsConfig",
     "home.apps.HomeConfig",
     "nysc.apps.NyscConfig",
@@ -169,7 +168,7 @@ LOGIN_REDIRECT_URL = "home"
 ACCOUNT_LOGOUT_REDIRECT_URL = "home"
 ACCOUNT_SESSION_REMEMBER = True
 ACCOUNT_SIGNUP_PASSWORD_ENTER_TWICE = False
-ACCOUNT_USERNAME_REQUIRED = False
+# ACCOUNT_USERNAME_REQUIRED = False
 ACCOUNT_AUTHENTICATION_METHOD = "email"
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_UNIQUE_EMAIL = True
@@ -192,3 +191,10 @@ CART_SESSION_ID = "cart"
 PAYSTACK_TEST_SECRETE_KEY = env("PAYSTACK_TEST_SECRETE_KEY")
 PAYSTACK_TEST_PUBLIC_KEY = env("PAYSTACK_TEST_PUBLIC_KEY")
 PAYSTACK_INITIALIZE_PAYMENT_URL = "https://api.paystack.co/transaction/initialize"
+
+ACCOUNT_FORMS = {
+    "signup": "accounts.forms.CustomSignupForm",
+}
+
+# EMAIL
+DEFAULT_FROM_EMAIL = "jumemegawears@gmail.com"

@@ -1,20 +1,17 @@
-from django.views.generic import ListView, DetailView, DeleteView, View
+from django.views.generic import ListView, DetailView, DeleteView, TemplateView
 from django.views.generic.edit import CreateView
 from .models import Photo, Contact, Inspo, Video
 from django.urls import reverse_lazy
 
 
-class HomeCreateView(CreateView):
-    model = Contact
+class HomeCreateView(TemplateView):
     template_name = "home.html"
-    fields = ["name", "email", "message"]
-    success_url = reverse_lazy("home")
 
 
 class Photos(ListView):
     model = Photo
     template_name = "photo.html"
-    paginate_by = 4
+    paginate_by = 20
 
 
 class DetailPhotoView(DetailView):
@@ -25,7 +22,7 @@ class DetailPhotoView(DetailView):
 class Inspos(ListView):
     model = Inspo
     template_name = "inspo.html"
-    paginate_by = 4
+    paginate_by = 20
 
 
 class DetailInspoView(DetailView):
@@ -36,7 +33,7 @@ class DetailInspoView(DetailView):
 class Videos(ListView):
     model = Video
     template_name = "video.html"
-    paginate_by = 4
+    paginate_by = 20
 
 
 class DetailVideoView(DetailView):
@@ -54,3 +51,14 @@ class ContactDeleteView(DeleteView):
     model = Contact
     template_name = "contact_delete_view.html"
     success_url = reverse_lazy("nze_stan")
+
+
+class AboutUsView(TemplateView):
+    template_name = "about_us.html"
+
+
+class ContactUsView(CreateView):
+    model = Contact
+    template_name = "contact_us.html"
+    fields = ["name", "email", "message"]
+    success_url = reverse_lazy("contact_us")

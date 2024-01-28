@@ -7,16 +7,23 @@
 <div class="grid grid-auto-fit-[100px] gap-10">
     {% for video in object_list %}
     <div>
-        <a href="{% url 'detail_video' video.pk %}">
-            <video class="w-full" controls>
+        <a href="{{video.get_absolute_url}}">
+            <video class="min-h-full" controls>
                 <source src="{{video.video.url}}" type="video/mp4">
                 Your browser does not support the video tag.
             </video>
         </a>
+        <a class="grid justify-center" href="https://wa.link/hgadxf"><img width="100px" height="100px"
+                src="https://res.cloudinary.com/dhhaiy58r/image/upload/v1704207702/WhatsApp-Logo.wine_nbsnhs.png"
+                alt="whatsapp_LOGO"></a>
     </div>
     {% endfor %}
 
 </div>
+<br>
+<br>
+<br>
+<br>
 {% include "pagination.html" with page=page_obj %}
 
 

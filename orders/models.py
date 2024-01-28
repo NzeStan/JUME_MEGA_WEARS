@@ -1,14 +1,16 @@
 from django.db import models
 from nysc.models import Product
+from django.contrib.auth import get_user_model
 
 
 class Order(models.Model):
+    user = models.OneToOneField(get_user_model(), blank=True, on_delete=models.CASCADE)
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
     email = models.EmailField()
-    address = models.CharField(max_length=250)
-    postal_code = models.CharField(max_length=20)
-    city = models.CharField(max_length=100)
+    phone_number = models.CharField(max_length=11)
+    state_of_deployment = models.CharField(max_length=250, default="To be Updated")
+    nysc_call_up_number = models.CharField(max_length=150, default="To be Updated")
     created = models.DateTimeField(auto_now_add=True)
     paystack_ref = models.CharField(max_length=15, blank=True)
     updated = models.DateTimeField(auto_now=True)

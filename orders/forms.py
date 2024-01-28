@@ -9,7 +9,7 @@ class OrderCreateForm(forms.ModelForm):
             "first_name",
             "last_name",
             "email",
-            "address",
-            "postal_code",
-            "city",
+            "phone_number",
+            "state_of_deployment",
+            "nysc_call_up_number",
         ]

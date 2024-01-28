@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enugu</title>
+    <style>
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        td,
+        th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+    </style>
+</head>
+
+<body>
+    <h2>ABA</h2>
+
+    <table>
+        <tr>
+            <th>ORDER ID</th>
+            <th>NAME</th>
+            <th>CALL UP NUMBER</th>
+            <th>ITEM</th>
+            <th>SIZE</th>
+            <th>QUANTITY</th>
+        </tr>
+        {% for orders in order %}
+        {%if orders.order.paid == True and orders.order.state_of_deployment == "Abia" %}
+        <tr>
+            <td>{{orders.order.id}}</td>
+            <td>{{orders.order.first_name}} {{orders.order.last_name}}</td>
+            <td>{{orders.user.nysc_call_up_number}}</td>
+            <td>{{orders.product.name}}</td>
+            <td>{{orders.product.size}}</td>
+            <td>{{orders.quantity}}</td>
+        </tr>
+        {%endif%}
+        {% endfor%}
+    </table>
+
+</body>
+
+</html>
