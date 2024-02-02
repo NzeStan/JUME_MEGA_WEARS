@@ -1,67 +1,50 @@
-from django.shortcuts import render, redirect, get_object_or_404
-from django.urls import reverse
-from .models import OrderItem, Order
-from .forms import OrderCreateForm
-from cart.cart import Cart
-from django.contrib.auth.decorators import login_required
-from django.contrib.admin.views.decorators import staff_member_required
-from django.http import HttpResponse
-from django.template.loader import render_to_string
-import weasyprint
-from django.views.generic.edit import UpdateView
-from django.urls import reverse_lazy
+from django.db import models
+from nysc.models import Product, Measurement
 from django.contrib.auth import get_user_model
-from nysc.models import Measurement
-
-# Create your views here.
 
 
-@login_required
-def order_create(request):
-    cart = Cart(request)
-    if request.method == "POST":
-        form = OrderCreateForm(request.POST)
-        if form.is_valid():
-            order = form.save()
+class Order(models.Model):
+    first_name = models.CharField(max_length=50)
+    last_name = models.CharField(max_length=50)
+    email = models.EmailField()
+    phone_number = models.CharField(max_length=11)
+    created = models.DateTimeField(auto_now_add=True)
+    paystack_ref = models.CharField(max_length=15, blank=True)
+    updated = models.DateTimeField(auto_now=True)
+    paid = models.BooleanField(default=False)
 
-            current_user = request.user
-            measurement = Measurement.objects.get(user=current_user)
+    class Meta:
+        ordering = ["-created"]
+        indexes = [
+            models.Index(fields=["-created"]),
+        ]
 
-            for item in cart:
-                OrderItem.objects.create(
-                    order=order,
-                    product=item["product"],
-                    price=item["price"],
-                    quantity=item["quantity"],
-                    measurement_id=measurement.id,
-                    user=current_user
-                )
-            cart.clear()
-            request.session["order_id"] = order.id
-            # redirect for payment
-            return redirect(reverse("process"))
+    def __str__(self):
+        return f"Order {self.id}"
 
-    else:
-        form = OrderCreateForm()
-    return render(request, "create.html", {"cart": cart, "form": form})
+    def get_total_cost(self):
+        return sum(item.get_cost() for item in self.items.all())
 
 
-@staff_member_required
-def admin_order_pdf(request, order_id):
-    order = get_object_or_404(Order, id=order_id)
-    html = render_to_string("pdf.html", {"order": order})
-    response = HttpResponse(content_type="application/pdf")
-    response["Content-Disposition"] = f"filename=order_{order.id}.pdf"
-    weasyprint.HTML(string=html).write_pdf(response)
-    return response
+class OrderItem(models.Model):
+    user = models.ForeignKey(
+        get_user_model(),
+        on_delete=models.CASCADE,
+        null=False,
+    )
+    order = models.ForeignKey(Order, related_name="items", on_delete=models.CASCADE)
+    product = models.ForeignKey(
+        Product, related_name="order_items", on_delete=models.CASCADE
+    )
+    measurement = models.ForeignKey(
+        Measurement, related_name="mesaurement", on_delete=models.CASCADE, null=False
+    )
 
+    price = models.DecimalField(max_digits=10, decimal_places=2)
+    quantity = models.PositiveIntegerField(default=1)
 
-@staff_member_required
-def state_aba(request):
-    order_items = OrderItem.objects.select_related("order", "product", "user")
-    context = {"order_items": order_items, "user": request.user}
-    html = render_to_string("state_aba.html", context)
-    response = HttpResponse(content_type="application/pdf")
-    response["Content-Disposition"] = f"filename=order_Aba.pdf"
-    weasyprint.HTML(string=html).write_pdf(response)
-    return response
+    def __str__(self):
+        return str(self.id)
+
+    def get_cost(self):
+        return self.price * self.quantity
