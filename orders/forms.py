@@ -10,6 +10,4 @@ class OrderCreateForm(forms.ModelForm):
             "last_name",
             "email",
             "phone_number",
-            "state_of_deployment",
-            "nysc_call_up_number",
         ]

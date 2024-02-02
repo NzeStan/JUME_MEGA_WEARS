@@ -22,6 +22,7 @@ class Product(models.Model):
 
 
 class Measurement(models.Model):
+    user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, null=False)
     chest = models.IntegerField()
     shoulder = models.IntegerField()
     sleeve_length = models.IntegerField()
@@ -29,10 +30,8 @@ class Measurement(models.Model):
     thigh = models.IntegerField()
     trouser_length = models.IntegerField()
 
+    def __str__(self):
+        return self.user.username
+
     def get_absolute_url(self):
         return reverse("update_measurement", args=[str(self.id)])
-
-    def save(self, *args, **kwargs):
-        if self.__class__.objects.count():
-            self.pk = self.__class__.objects.first().pk
-        super().save(*args, **kwargs)

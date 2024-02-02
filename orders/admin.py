@@ -26,8 +26,6 @@ class OrderAdmin(admin.ModelAdmin):
         "last_name",
         "email",
         "phone_number",
-        "state_of_deployment",
-        "nysc_call_up_number",
         "paid",
         "created",
         "updated",

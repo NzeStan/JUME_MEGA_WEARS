@@ -4,6 +4,7 @@
 
 <div class="grid grid-auto-fit justify-between justify-items-center gap-4">
     {% for product in products %}
+    {% if product.available %}
     <a href="{{product.get_absolute_url}}">
         <div
             class=" w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
@@ -20,6 +21,7 @@
             </div>
         </div>
     </a>
+    {%endif%}
     {% endfor %}
 </div>
 

@@ -14,9 +14,11 @@ class CustomUserAdmin(UserAdmin):
         "id",
         "email",
         "username",
-        "phone_number",
         "first_name",
         "last_name",
+        "phone_number",
+        "nysc_call_up_number",
+        "state_of_deployment",
         "is_superuser",
     ]
 

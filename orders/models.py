@@ -1,16 +1,13 @@
 from django.db import models
-from nysc.models import Product
+from nysc.models import Product, Measurement
 from django.contrib.auth import get_user_model
 
 
 class Order(models.Model):
-    user = models.OneToOneField(get_user_model(), blank=True, on_delete=models.CASCADE)
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
     email = models.EmailField()
     phone_number = models.CharField(max_length=11)
-    state_of_deployment = models.CharField(max_length=250, default="To be Updated")
-    nysc_call_up_number = models.CharField(max_length=150, default="To be Updated")
     created = models.DateTimeField(auto_now_add=True)
     paystack_ref = models.CharField(max_length=15, blank=True)
     updated = models.DateTimeField(auto_now=True)
@@ -30,10 +27,19 @@ class Order(models.Model):
 
 
 class OrderItem(models.Model):
+    user = models.ForeignKey(
+        get_user_model(),
+        on_delete=models.CASCADE,
+        null=False,
+    )
     order = models.ForeignKey(Order, related_name="items", on_delete=models.CASCADE)
     product = models.ForeignKey(
         Product, related_name="order_items", on_delete=models.CASCADE
     )
+    measurement = models.ForeignKey(
+        Measurement, related_name="mesaurement", on_delete=models.CASCADE, null=False
+    )
+
     price = models.DecimalField(max_digits=10, decimal_places=2)
     quantity = models.PositiveIntegerField(default=1)
 

@@ -134,6 +134,51 @@
     <!-- End of new HTML -->
     {% endblock nav_bar %}
 
+    <!-- base.html or template where messages are displayed -->
+    {% if messages %}
+    <div class="flex items-center justify-center h-screen">
+        <div class="bg-gray-800 text-white rounded p-6 shadow-md max-w-md w-full">
+            {% for message in messages %}
+            <div class="{% if message.tags %}{{ message.tags }}{% else %}bg-blue-500{% endif %} mb-4 rounded-md p-4">
+                <div class="flex items-center">
+                    <div class="mr-2">
+                        {% if message.tags == 'success' %}
+                        <svg class="h-6 w-6 text-green-300" xmlns="http://www.w3.org/2000/svg" fill="none"
+                            viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7">
+                            </path>
+                        </svg>
+                        {% elif message.tags == 'warning' %}
+                        <svg class="h-6 w-6 text-yellow-300" xmlns="http://www.w3.org/2000/svg" fill="none"
+                            viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7">
+                            </path>
+                        </svg>
+                        {% elif message.tags == 'error' %}
+                        <svg class="h-6 w-6 text-red-300" xmlns="http://www.w3.org/2000/svg" fill="none"
+                            viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                        {% else %}
+                        <svg class="h-6 w-6 text-blue-300" xmlns="http://www.w3.org/2000/svg" fill="none"
+                            viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                        {% endif %}
+                    </div>
+                    <div>
+                        <p class="text-lg font-semibold">{{ message.tags|default:'Info' }}</p>
+                        <p>{{ message }}</p>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+
     <div class="container mx-auto mt-4 px-6">
         {% block content %}
         {% endblock content %}
@@ -181,7 +226,7 @@
 
     {% block absolute_link %}
     <!--absoute links-->
-    <div class="fixed bottom-40 right-2">
+    <div class="fixed bottom-40 right-2 z-50">
         <a href="{% url 'nysc_landing'%}"><img width="50px" height="50px"
                 src="https://res.cloudinary.com/dhhaiy58r/image/upload/v1690401957/image/NYSC_LOGO.svg_yfwrlp.png"
                 alt="NYSC_LOGO"></a>

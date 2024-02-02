@@ -1,24 +1,17 @@
 {% extends "_base.html" %}
 
 {% block content %}
-<div id="about" class="grid grid-auto-fit gap-3">
-    <div class="col-span-2">
-        <video class="min-h-full" autoplay loop>
+<div id="about" class="grid grid-cols-1 md:grid-cols-2 gap-3">
+    <div class="col-span-1 md:col-span-2">
+        <video class="w-full h-full object-cover" autoplay loop muted playsinline>
             <source
                 src="https://res.cloudinary.com/dhhaiy58r/video/upload/v1705773454/media/White_Animated_Welcome_to_My_Channel_Youtube_Intro_Video_yg4l2k.mp4"
                 type="video/mp4">
             Your browser does not support the video tag.
         </video>
     </div>
-    <div class="justify-self-center">
-        <video class="min-h-full" autoplay loop>
-            <source
-                src="https://res.cloudinary.com/dhhaiy58r/video/upload/v1705773462/media/Red_White_Modern_Fashion_Sale_Poster_pxwd5z.mp4"
-                type="video/mp4">
-            Your browser does not support the video tag.
-        </video>
-    </div>
 </div>
+
 
 <!--gallery-->
 <div class="grid gap-4 pt-10">

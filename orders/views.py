@@ -10,7 +10,8 @@ from django.template.loader import render_to_string
 import weasyprint
 from django.views.generic.edit import UpdateView
 from django.urls import reverse_lazy
-
+from django.contrib.auth import get_user_model
+from nysc.models import Measurement
 
 # Create your views here.
 
@@ -49,24 +50,11 @@ def admin_order_pdf(request, order_id):
     return response
 
 
-class UpdateOrderView(UpdateView):
-    model = Order
-    fields = ["state_of_deployment", "nysc_call_up_number"]
-    success_url = reverse_lazy("nysc_landing")
-    template_name = "update_order.html"
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context = {
-            "order_update": self.model.objects.select_related("user"),
-        }
-        return context
-
-
 @staff_member_required
 def state_aba(request):
-    order = OrderItem.objects.select_related("order", "product")
-    html = render_to_string("state_aba.html", {"order": order})
+    order_items = OrderItem.objects.select_related("order", "product", "user")
+    context = {"order_items": order_items, "user": request.user}
+    html = render_to_string("state_aba.html", context)
     response = HttpResponse(content_type="application/pdf")
     response["Content-Disposition"] = f"filename=order_Aba.pdf"
     weasyprint.HTML(string=html).write_pdf(response)

@@ -37,20 +37,21 @@
             <th>SIZE</th>
             <th>QUANTITY</th>
         </tr>
-        {% for orders in order %}
-        {%if orders.order.paid == True and orders.order.state_of_deployment == "Abia" %}
+        {% for order_item in order_items %}
+
         <tr>
-            <td>{{orders.order.id}}</td>
-            <td>{{orders.order.first_name}} {{orders.order.last_name}}</td>
-            <td>{{orders.user.nysc_call_up_number}}</td>
-            <td>{{orders.product.name}}</td>
-            <td>{{orders.product.size}}</td>
-            <td>{{orders.quantity}}</td>
+            <td>{{order_item.order.id}}</td>
+            <td>{{order_item.user.last_name}} {{order_item.user.first_name}}</td>
+            <td>{{order_item.user.nysc_call_up_number}}</td>
+            <td>{{order_item.product.name}}</td>
+            <td>{{order_item.product.size}}</td>
+            <td>{{order_item.quantity}}</td>
         </tr>
-        {%endif%}
+
         {% endfor%}
     </table>
 
+    {{user.username}}
 </body>
 
 </html>
