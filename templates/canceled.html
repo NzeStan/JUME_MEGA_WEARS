@@ -1,8 +1,25 @@
 {% extends "_base.html" %}
 
-{% block title %}Payment canceled{% endblock %}
+{% block title %}Payment Unsuccessful{% endblock %}
 
 {% block content %}
-<h1>Your payment has not been processed</h1>
-<p>There was a problem processing your payment.</p>
+<div class="bg-white p-8 rounded-lg shadow-md max-w-md w-full">
+    <img src="https://res.cloudinary.com/dhhaiy58r/image/upload/v1707154344/failed_ny3rgb.png" alt="Error Icon"
+        class="mx-auto mb-6">
+
+    <h1 class="text-2xl font-semibold text-red-600 mb-4">Payment Unsuccessful</h1>
+
+    <p class="text-gray-600 mb-6">
+        Unfortunately, there was an issue with your payment. Please try again.
+    </p>
+
+    <a href="/"
+        class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition duration-300 block text-center">
+        Return to Homepage
+    </a>
+</div>
+
+<div class="mt-8 text-center">
+    <p class="text-gray-700">If the issue persists, contact support for assistance.</p>
+</div>
 {% endblock content %}

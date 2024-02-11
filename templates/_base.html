@@ -22,19 +22,15 @@
 
 <body class="bg-green-50">
     {% block header %}
-    <div>
-        <div>
-            <video autoplay loop>
-                <source
-                    src="https://res.cloudinary.com/dhhaiy58r/video/upload/v1705773457/media/JUME_MEGA_WEARS_hk5wfy.mp4"
-                    type="video/mp4">
-                Your browser does not support the video tag.
-            </video>
-        </div>
-
+    <div class="relative h-80 overflow-hidden">
+        <video class="absolute inset-0 w-full h-full object-cover" autoplay loop muted>
+            <source src="https://res.cloudinary.com/dhhaiy58r/video/upload/v1705773457/media/JUME_MEGA_WEARS_hk5wfy.mp4"
+                type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
     </div>
-    {% endblock header %}
 
+    {% endblock header %}
     <!-- Add this -->
     {% block nav_bar %}
     <nav class="bg-green-50 border-gray-200 px-2 sm:px-4 py-2.5 rounded dark:bg-gray-800 sticky top-0 w-full z-20">

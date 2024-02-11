@@ -11,7 +11,7 @@ class HomeCreateView(TemplateView):
 class Photos(ListView):
     model = Photo
     template_name = "photo.html"
-    paginate_by = 20
+    paginate_by = 6
 
 
 class DetailPhotoView(DetailView):
@@ -22,7 +22,7 @@ class DetailPhotoView(DetailView):
 class Inspos(ListView):
     model = Inspo
     template_name = "inspo.html"
-    paginate_by = 20
+    paginate_by = 6
 
 
 class DetailInspoView(DetailView):
@@ -33,7 +33,7 @@ class DetailInspoView(DetailView):
 class Videos(ListView):
     model = Video
     template_name = "video.html"
-    paginate_by = 20
+    paginate_by = 6
 
 
 class DetailVideoView(DetailView):

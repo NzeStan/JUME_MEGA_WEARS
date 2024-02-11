@@ -17,5 +17,3 @@ services:
             - "POSTGRES_HOST_AUTH_METHOD=trust"
 volumes:
     postgres_data:
-
-# gVybEPXVKB9#Zk%

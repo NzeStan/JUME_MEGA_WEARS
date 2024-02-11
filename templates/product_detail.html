@@ -1,15 +1,16 @@
 {% extends "_base.html" %}
 
-
 {% block content %}
-<a href="{% url 'product_list' %}"><button type="button"
-        class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Back</button></a>
+<a href="{% url 'product_list' %}">
+    <button type="button"
+        class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Back</button>
+</a>
 
 <div class="grid grid-cols-1 justify-items-center">
     <div>
         <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-            <div>
-                <img class="rounded-t-lg" src="{{product.image.url}}" alt="" />
+            <div class="aspect-w-16 aspect-h-9"> <!-- Aspect ratio container -->
+                <img class="object-cover w-full h-full rounded-t-lg" src="{{product.image.url}}" alt="" />
             </div>
             <div class="p-5">
 
@@ -17,21 +18,44 @@
                     ({{product.size}})</h5>
                 <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">{{product.description}}</p>
                 <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{product.price}}</h5>
-                <form action="{% url 'cart_add' product.id %}" method="post">
-                    {{ cart_product_form }}
+
+                {% if product.id == 1 %}
+                {% if user_measurement %}
+                <form action="{% url 'cart_add' product.id %}" method="post" class="flex flex-row items-center">
+                    <div class="mr-4">
+                        {{ cart_product_form }}
+                    </div>
                     {% csrf_token %}
-                    <br>
                     <button type="submit"
-                        class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                        type="button">
+                        class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                         Add to Cart
                     </button>
                 </form>
-
+                {% else %}
+                <p>Please create your measurement before adding this product to the cart.</p>
+                <a href="{% url 'create_measurement' %}">
+                    <button type="button"
+                        class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                        Create Measurement
+                    </button>
+                </a>
+                {% endif %}
+                {% else %}
+                <!-- Add to cart button for other products -->
+                <form action="{% url 'cart_add' product.id %}" method="post" class="flex flex-row items-center">
+                    <div class="mr-4">
+                        {{ cart_product_form }}
+                    </div>
+                    {% csrf_token %}
+                    <button type="submit"
+                        class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                        Add to Cart
+                    </button>
+                </form>
+                {% endif %}
             </div>
         </div>
     </div>
 </div>
-
 
 {% endblock content %}

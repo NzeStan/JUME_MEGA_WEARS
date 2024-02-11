@@ -20,7 +20,15 @@ class ProductDetail(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        product = self.get_object()
         context["cart_product_form"] = self.cart_product_form = CartAddProductForm()
+
+        if product.id == 1:
+            user_measurement = Measurement.objects.filter(
+                user=self.request.user
+            ).first()
+            context["user_measurement"] = user_measurement
+
         return context
 
 
@@ -32,7 +40,7 @@ class NyscLandingPage(TemplateView):
         context = super().get_context_data(**kwargs)
         context = {
             "measurement": self.model.objects.select_related("user").filter(
-                user=self.request.user.is_authenticated
+                user=self.request.user.id
             ),
         }
         return context

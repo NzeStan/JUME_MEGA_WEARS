@@ -5,21 +5,19 @@ from allauth.account.forms import SignupForm
 
 
 class CustomUserCreationForm(UserCreationForm):
-    class Meta:
+    class Meta(UserCreationForm):
         model = get_user_model()
-        fields = (
-            "email",
-            "username",
+        fields = UserCreationForm.Meta.fields + (
+            "phone_number",
+            "nysc_call_up_number",
+            "state_of_deployment",
         )
 
 
 class CustomUserChangeForm(UserChangeForm):
     class Meta:
         model = get_user_model()
-        fields = (
-            "email",
-            "username",
-        )
+        fields = UserChangeForm.Meta.fields
 
 
 class CustomSignupForm(SignupForm):

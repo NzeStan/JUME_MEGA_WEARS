@@ -37,7 +37,11 @@ class OrderItem(models.Model):
         Product, related_name="order_items", on_delete=models.CASCADE
     )
     measurement = models.ForeignKey(
-        Measurement, related_name="mesaurement", on_delete=models.CASCADE, null=False
+        Measurement,
+        related_name="mesaurement",
+        on_delete=models.CASCADE,
+        null=True,
+        blank=True,
     )
 
     price = models.DecimalField(max_digits=10, decimal_places=2)

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jigawa</title>
+    <style>
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        td,
+        th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+    </style>
+</head>
+
+<body>
+    <h2>JIGAWA</h2>
+
+    <table>
+        <tr>
+            <th>ORDER ID</th>
+            <th>NAME</th>
+            <th>CALL UP NUMBER</th>
+            <th>ITEM</th>
+            <th>SIZE</th>
+            <th>QUANTITY</th>
+        </tr>
+        {% for order_item in order_items %}
+
+        <tr>
+            <td>{{order_item.order.id}}</td>
+            <td>{{order_item.user.last_name}} {{order_item.user.first_name}}</td>
+            <td>{{order_item.user.nysc_call_up_number}}</td>
+            <td>{{order_item.product.name}}</td>
+            <td>{{order_item.product.size}}</td>
+            <td>{{order_item.quantity}}</td>
+        </tr>
+
+        {% endfor%}
+    </table><br>
+
+    <h1>SUMMARY</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Product</th>
+                <th>Size</th>
+                <th>Total Count</th>
+                <th>Total Sum</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in summary_query %}
+            <tr>
+                <td>{{ item.product__name }}</td>
+                <td>{{ item.product__size }}</td>
+                <td>{{ item.total_count }}</td>
+                <td>{{ item.total_sum }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <br>
+    <table>
+        {% for order_measure in order_items %}
+        {% if order_measure.measurement and order_measure.product.id == 1%}
+        <tr>
+
+            <td>{{order_measure.order.id}}</td>
+            <td>{{order_measure.measurement.chest}}</td>
+            <td>{{order_measure.measurement.shoulder}}</td>
+            <td>{{order_measure.measurement.sleeve_length}}</td>
+            <td>{{order_measure.measurement.waist}}</td>
+            <td>{{order_measure.measurement.thigh}}</td>
+            <td>{{order_measure.measurement.trouser_length}}</td>
+        </tr>
+        {%endif%}
+        {%endfor%}
+    </table>
+</body>
+
+</html>

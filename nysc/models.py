@@ -22,13 +22,13 @@ class Product(models.Model):
 
 
 class Measurement(models.Model):
-    user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, null=False)
-    chest = models.IntegerField()
-    shoulder = models.IntegerField()
-    sleeve_length = models.IntegerField()
-    waist = models.IntegerField()
-    thigh = models.IntegerField()
-    trouser_length = models.IntegerField()
+    user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, null=True)
+    chest = models.IntegerField(null=True)
+    shoulder = models.IntegerField(null=True)
+    sleeve_length = models.IntegerField(null=True)
+    waist = models.IntegerField(null=True)
+    thigh = models.IntegerField(null=True)
+    trouser_length = models.IntegerField(null=True)
 
     def __str__(self):
         return self.user.username
