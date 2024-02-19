@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Product, Measurement, CountdownDateTime
+from .models import Product, Measurement
 
 
 @admin.register(Product)
