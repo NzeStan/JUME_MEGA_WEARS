@@ -1,12 +1,12 @@
 {% extends "_base.html" %}
-
+{% load ratings %}
 {% block content %}
 <a href="{% url 'product_list' %}">
     <button type="button"
         class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Back</button>
 </a>
 
-<div class="grid grid-cols-1 justify-items-center">
+<div class="grid grid-auto-fit justify-items-center gap-4">
     <div>
         <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
             <div class="aspect-w-16 aspect-h-9"> <!-- Aspect ratio container -->
@@ -18,7 +18,7 @@
                     ({{product.size}})</h5>
                 <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">{{product.description}}</p>
                 <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{product.price}}</h5>
-
+                {% ratings product icon_height=24 icon_width=24 %}
                 {% if product.id == 1 %}
                 {% if user_measurement %}
                 <form action="{% url 'cart_add' product.id %}" method="post" class="flex flex-row items-center">
@@ -41,7 +41,6 @@
                 </a>
                 {% endif %}
                 {% else %}
-                <!-- Add to cart button for other products -->
                 <form action="{% url 'cart_add' product.id %}" method="post" class="flex flex-row items-center">
                     <div class="mr-4">
                         {{ cart_product_form }}
@@ -56,6 +55,9 @@
             </div>
         </div>
     </div>
+
+
 </div>
+
 
 {% endblock content %}

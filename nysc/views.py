@@ -6,6 +6,8 @@ from orders.models import Order
 from django.urls import reverse_lazy
 from django.http.response import HttpResponseRedirect
 from django.urls import reverse
+from django.shortcuts import render, redirect
+from django.views.generic import DetailView
 
 
 class ProductList(ListView):
@@ -20,15 +22,12 @@ class ProductDetail(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        product = self.get_object()
-        context["cart_product_form"] = self.cart_product_form = CartAddProductForm()
-
-        if product.id == 1:
+        context["cart_product_form"] = CartAddProductForm()
+        if self.request.user.is_authenticated:
             user_measurement = Measurement.objects.filter(
                 user=self.request.user
             ).first()
             context["user_measurement"] = user_measurement
-
         return context
 
 

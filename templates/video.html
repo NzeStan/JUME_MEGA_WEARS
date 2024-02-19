@@ -6,7 +6,7 @@
 
 <div class="grid grid-auto-fit-[100px] gap-10">
     {% for video in object_list %}
-    <div>
+    <div style="padding-bottom: 20px;">
         <a href="{{video.get_absolute_url}}">
             <video class="min-h-full" controls>
                 <source src="{{video.video.url}}" type="video/mp4">
@@ -26,5 +26,16 @@
 <br>
 {% include "pagination.html" with page=page_obj %}
 
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const whatsappIcon = document.querySelector('.whatsapp-icon');
+        whatsappIcon.addEventListener('click', function (event) {
+            event.preventDefault();
+            const videoUrl = "{{ video.video.url }}"; // URL of the video
+            const whatsappMessage = `https://wa.me/?text=Check%20out%20this%20video:%20${encodeURIComponent(videoUrl)}`;
+            window.location.href = whatsappMessage;
+        });
+    });
+</script>
 
 {% endblock content %}

@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     "allauth.account",
     "cloudinary_storage",
     "cloudinary",
+    "star_ratings",
     "accounts.apps.AccountsConfig",
     "home.apps.HomeConfig",
     "nysc.apps.NyscConfig",
@@ -198,3 +199,7 @@ ACCOUNT_FORMS = {
 
 # EMAIL
 DEFAULT_FROM_EMAIL = "jumemegawears@gmail.com"
+
+# Review
+STAR_RATINGS_RERATE_SAME_DELETE = True
+STAR_RATINGS_CLEARABLE = True

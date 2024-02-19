@@ -30,3 +30,5 @@ RUN pip install -r requirements.txt
 
 # Copy project
 COPY . .
+
+EXPOSE 8000
