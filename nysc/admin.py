@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Product, Measurement
+from .models import Product, Measurement, Event
 
 
 @admin.register(Product)
@@ -34,4 +34,12 @@ class MeasurementAdmin(admin.ModelAdmin):
         "waist",
         "thigh",
         "trouser_length",
+    ]
+
+
+@admin.register(Event)
+class EventAdmin(admin.ModelAdmin):
+    list_display = [
+        "id",
+        "end_datetime",
     ]

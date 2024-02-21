@@ -1,13 +1,14 @@
 from django.views.generic import ListView, DetailView, TemplateView
 from django.views.generic.edit import CreateView, UpdateView
-from .models import Product, Measurement
+from .models import Product, Measurement, Event
 from cart.forms import CartAddProductForm
 from orders.models import Order
 from django.urls import reverse_lazy
 from django.http.response import HttpResponseRedirect
 from django.urls import reverse
-from django.shortcuts import render, redirect
+from django.shortcuts import render
 from django.views.generic import DetailView
+from django.utils import timezone
 
 
 class ProductList(ListView):
@@ -86,3 +87,13 @@ class UpdateMeasurementView(UpdateView):
         instance = form.save(commit=False)
         instance.user = self.request.user
         return super(UpdateMeasurementView, self).form_valid(form)
+
+
+def event_detail(request, event_id):
+    event = Event.objects.get(pk=event_id)
+    current_datetime = timezone.now()
+    return render(
+        request,
+        "nysc_landing.html",
+        {"event": event, "current_datetime": current_datetime},
+    )

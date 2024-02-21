@@ -93,8 +93,10 @@
 {% endif %}
 {% endif %}
 <br>
-<h1>Countdown Timer Created!</h1>
-<p>Remaining Time: {{ countdown_timer.remaining_time }}</p>
+
+<div id="countdown"></div>
+
+
 <!--shop button-->
 <div class="grid justify-items-center mt-4 mb-4">
 
@@ -104,7 +106,9 @@
             Now</button>
     </a>
 </div>
-
+{% for a in countdown_datetime%}
+{{a.target_datetime}}
+{%endfor%}
 {% endblock content %}
 
 {% block absolute_link %}

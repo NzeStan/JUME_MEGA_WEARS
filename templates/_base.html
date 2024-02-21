@@ -10,7 +10,7 @@
     <link rel="icon" type="image/x-icon"
         href="https://res.cloudinary.com/dhhaiy58r/image/upload/v1704227011/favicon_3_x5mpol.ico">
     <link rel="stylesheet" href="{% static 'star-ratings/css/star-ratings.css' %}">
-
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <title>
         {% block title %}
         JUME MEGA WEARS & ACCESSORIES
@@ -226,8 +226,42 @@
                 alt="NYSC_LOGO"></a>
     </div>
     {% endblock absolute_link %}
+
+    {% block javascript %}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.0/flowbite.min.js"></script>
     <script type="text/javascript" src="{% static 'star-ratings/js/dist/star-ratings.min.js' %}"></script>
+    <script>
+        // Function to update the countdown timer
+        function updateCountdown(endTime) {
+            var now = new Date();
+            var distance = new Date(endTime) - now;
+
+            // Calculating remaining time
+            var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            // Displaying the countdown timer
+            document.getElementById("countdown").innerHTML = days + "d " + hours + "h "
+                + minutes + "m " + seconds + "s ";
+
+            // If the countdown is over, display a message
+            if (distance < 0) {
+                clearInterval(timer);
+                document.getElementById("countdown").innerHTML = "EXPIRED";
+            }
+        }
+
+        // Fetching the end datetime from backend
+        var endTime = "{{ event.end_datetime }}";
+
+        // Update the countdown timer every second
+        var timer = setInterval(function () {
+            updateCountdown(endTime);
+        }, 1000);
+    </script>
+    {% endblock %}
 </body>
 
 </html>

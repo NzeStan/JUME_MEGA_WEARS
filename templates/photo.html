@@ -21,6 +21,10 @@
 <br>
 {% include "pagination.html" with page=page_obj %}
 
+
+
+{% endblock content %}
+{% block javascript %}
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         const whatsappIcon = document.querySelector('.whatsapp-icon');
@@ -32,5 +36,4 @@
         });
     });
 </script>
-
-{% endblock content %}
+{% endblock %}

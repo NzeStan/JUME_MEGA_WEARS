@@ -35,3 +35,7 @@ class Measurement(models.Model):
 
     def get_absolute_url(self):
         return reverse("update_measurement", args=[str(self.id)])
+
+
+class Event(models.Model):
+    end_datetime = models.DateTimeField()
