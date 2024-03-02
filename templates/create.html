@@ -46,7 +46,7 @@
                 {% for item in cart %}
                 <li class="flex justify-between items-center mb-1">
                     <span>{{ item.quantity }}x {{ item.product.name }}</span>
-                    <span>N{{ item.total_price }}</span>
+                    <span><br>N{{ item.total_price }}</span>
                 </li>
                 {% endfor %}
             </ul>
@@ -56,3 +56,6 @@
 </div>
 </div>
 {% endblock content %}
+{% block absolute_links %}
+
+{% endblock absolute_links %}

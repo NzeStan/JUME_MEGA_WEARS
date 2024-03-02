@@ -16,7 +16,8 @@
         <img src="{{ photo.image.url }}" class="dark:hidden w-[272px] h-[572px]" alt="Photo_details">
     </div>
     <br>
-    <a class="grid justify-center whatsapp-icon" href="#">
+    <a class="grid justify-center whatsapp-icon" href="#"
+        onclick="sendWhatsAppMessage('{{ photo.image.url }}'); return false;">
         <img width="100px" height="100px"
             src="https://res.cloudinary.com/dhhaiy58r/image/upload/v1704207702/WhatsApp-Logo.wine_nbsnhs.png"
             alt="whatsapp_LOGO">
@@ -27,19 +28,15 @@
 <br>
 <br>
 
-
-
 {% endblock content %}
-{% block javascript %}
+
+{% block absolute_links %}
 <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const whatsappIcon = document.querySelector('.whatsapp-icon');
-        whatsappIcon.addEventListener('click', function (event) {
-            event.preventDefault();
-            const imageUrl = "{{ photo.image.url }}"; // URL of the image
-            const whatsappMessage = `https://wa.me/?text=Check%20out%20this%20image:%20${encodeURIComponent(imageUrl)}`;
-            window.location.href = whatsappMessage;
-        });
-    });
+    function sendWhatsAppMessage(imageUrl) {
+        var phoneNumber = "+2348139425458"; // Replace with your phone number
+        var defaultText = "Thank you for contacting Jume Mega wears & Accessories. For all your unisex wears we have got you covered. --Quality is our Watch World--\n"; // Include newline character directly in the string
+        var message = defaultText + imageUrl;
+        window.location.href = "https://wa.me/" + phoneNumber + "/?text=" + encodeURIComponent(message);
+    }
 </script>
-{% endblock %}
+{% endblock absolute_links %}

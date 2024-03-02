@@ -9,6 +9,8 @@ from django.urls import reverse
 from django.shortcuts import render
 from django.views.generic import DetailView
 from django.utils import timezone
+from django.core.serializers import serialize
+from django.http import JsonResponse
 
 
 class ProductList(ListView):
@@ -56,7 +58,7 @@ class CreateMeasurementView(CreateView):
         "thigh",
         "trouser_length",
     ]
-    success_url = reverse_lazy("nysc_landing")
+    success_url = reverse_lazy("product_list")
     template_name = "create_measurement.html"
 
     def form_valid(self, form):
@@ -89,11 +91,25 @@ class UpdateMeasurementView(UpdateView):
         return super(UpdateMeasurementView, self).form_valid(form)
 
 
-def event_detail(request, event_id):
-    event = Event.objects.get(pk=event_id)
-    current_datetime = timezone.now()
-    return render(
-        request,
-        "nysc_landing.html",
-        {"event": event, "current_datetime": current_datetime},
-    )
+class EventDetailView(DetailView):
+    model = Event
+    template_name = "nysc_landing.html"
+    context_object_name = "event"
+
+    def get_object(self, queryset=None):
+        return Event.objects.first()
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        event = self.get_object()
+        context["event_json"] = serialize("json", [event])
+        context["current_datetime"] = timezone.now().isoformat()
+        return context
+
+
+def get_event_data(request):
+    event = Event.objects.first()
+    data = {
+        "end_datetime": event.end_datetime.isoformat(),
+    }
+    return JsonResponse(data)

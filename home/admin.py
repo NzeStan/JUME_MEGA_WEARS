@@ -2,6 +2,10 @@ from django.contrib import admin
 from .models import Contact, Photo, Inspo, Video
 
 
+# Override the default site header
+admin.site.site_header = "JUME MEGA WEARS & ACCESSORIES"
+
+
 class PhotoAdmin(admin.ModelAdmin):
     list_display = (
         "id",

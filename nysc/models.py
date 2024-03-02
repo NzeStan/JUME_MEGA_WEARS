@@ -20,6 +20,9 @@ class Product(models.Model):
     def get_absolute_url(self):
         return reverse("nysc_detail", args=[str(self.id)])
 
+    class Meta:
+        ordering = ["id"]
+
 
 class Measurement(models.Model):
     user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, null=True)

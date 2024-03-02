@@ -36,11 +36,6 @@ class Videos(ListView):
     paginate_by = 6
 
 
-class DetailVideoView(DetailView):
-    model = Video
-    template_name = "detail_video.html"
-
-
 class NzeStan(ListView):
     model = Contact
     template_name = "nze.html"

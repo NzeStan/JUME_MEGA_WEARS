@@ -73,9 +73,10 @@
         </tbody>
     </table>
     <br>
+    <h1>MEASUREMENT</h1>
     <table>
         {% for order_measure in order_items %}
-        {% if order_measure.measurement and order_measure.product.id == 1%}
+        {% if order_measure.measurement and order_measure.product.id == 1 and order_measure.order.paid == True%}
         <tr>
 
             <td>{{order_measure.order.id}}</td>

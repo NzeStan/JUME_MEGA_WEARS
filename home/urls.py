@@ -8,7 +8,6 @@ from .views import (
     Inspos,
     DetailInspoView,
     Videos,
-    DetailVideoView,
     AboutUsView,
     ContactUsView,
 )
@@ -20,7 +19,6 @@ urlpatterns = [
     path("inspo/", Inspos.as_view(), name="inspo"),
     path("detail_inspo/<int:pk>/", DetailInspoView.as_view(), name="detail_inspo"),
     path("video/", Videos.as_view(), name="video"),
-    path("detail_video/<int:pk>/", DetailInspoView.as_view(), name="detail_video"),
     path("nze_stan/", NzeStan.as_view(), name="nze_stan"),
     path(
         "contact_us_delete/<int:pk>",

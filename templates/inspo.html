@@ -8,9 +8,6 @@
     {% for inspo in object_list %}
     <div style="padding-bottom: 20px;">
         <a href="{{inspo.get_absolute_url}}"><img class="min-h-full  rounded-lg" src="{{inspo.inspo.url}}" alt=""></a>
-        <a class="grid justify-center" href="https://wa.link/hgadxf"><img width="100px" height="100px"
-                src="https://res.cloudinary.com/dhhaiy58r/image/upload/v1704207702/WhatsApp-Logo.wine_nbsnhs.png"
-                alt="whatsapp_LOGO"></a>
     </div>
     {% endfor %}
 
@@ -23,16 +20,7 @@
 
 
 {% endblock content %}
-{% block javascript %}
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const whatsappIcon = document.querySelector('.whatsapp-icon');
-        whatsappIcon.addEventListener('click', function (event) {
-            event.preventDefault();
-            const imageUrl = "{{ inspo.inspo.url }}"; // URL of the inspo image
-            const whatsappMessage = `https://wa.me/?text=Check%20out%20this%20image:%20${encodeURIComponent(imageUrl)}`;
-            window.location.href = whatsappMessage;
-        });
-    });
-</script>
-{% endblock %}
+
+{% block absolute_links %}
+
+{% endblock absolute_links %}
