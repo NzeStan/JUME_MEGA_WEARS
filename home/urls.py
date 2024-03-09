@@ -15,13 +15,13 @@ from .views import (
 urlpatterns = [
     path("", HomeCreateView.as_view(), name="home"),
     path("photo/", Photos.as_view(), name="photo"),
-    path("detail_photo/<int:pk>/", DetailPhotoView.as_view(), name="detail_photo"),
+    path("detail_photo/<uuid:pk>/", DetailPhotoView.as_view(), name="detail_photo"),
     path("inspo/", Inspos.as_view(), name="inspo"),
-    path("detail_inspo/<int:pk>/", DetailInspoView.as_view(), name="detail_inspo"),
+    path("detail_inspo/<uuid:pk>/", DetailInspoView.as_view(), name="detail_inspo"),
     path("video/", Videos.as_view(), name="video"),
     path("nze_stan/", NzeStan.as_view(), name="nze_stan"),
     path(
-        "contact_us_delete/<int:pk>",
+        "contact_us_delete/<uuid:pk>",
         ContactDeleteView.as_view(),
         name="contact_us_delete",
     ),

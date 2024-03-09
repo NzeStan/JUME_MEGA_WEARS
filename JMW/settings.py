@@ -31,7 +31,7 @@ SECRET_KEY = env("DJANGO_SECRET_KEY")
 DEBUG = env.bool("DJANGO_DEBUG")
 
 ALLOWED_HOSTS = ["localhost", "127.0.0.1", ".ngrok-free.app", "0.0.0.0"]
-CSRF_TRUSTED_ORIGINS = ["https://93a2-105-113-32-228.ngrok-free.app"]
+CSRF_TRUSTED_ORIGINS = ["https://14ad-105-120-130-4.ngrok-free.app"]
 
 
 # Application definition

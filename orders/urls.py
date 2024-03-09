@@ -5,7 +5,9 @@ from . import views
 urlpatterns = [
     path("create_orders/", views.order_create, name="order_create"),
     path(
-        "admin/order/<int:order_id>/pdf/", views.admin_order_pdf, name="admin_order_pdf"
+        "admin/order/<int:order_id>/pdf/",
+        views.admin_order_pdf,
+        name="admin_order_pdf",
     ),
     path("State_Abuja/", views.state_abuja, name="state_abuja"),
     path("State_Abia/", views.state_abia, name="state_abia"),

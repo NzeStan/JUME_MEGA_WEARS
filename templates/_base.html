@@ -207,7 +207,6 @@
                     <li>
                         <a href="{% url 'video' %}" class="mr-4 hover:underline md:mr-6">Video</a>
                     </li>
-                </ul>
             </div>
             <hr class="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" />
             <span class="block text-sm text-gray-500 sm:text-center dark:text-gray-400">© 2024 <a href="{% url 'home'%}"
@@ -247,40 +246,61 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.0/flowbite.min.js"></script>
     <script type="text/javascript" src="{% static 'star-ratings/js/dist/star-ratings.min.js' %}"></script>
     <script>
-        // Function to update the countdown timer
-        function updateCountdown(endTime) {
-            var now = new Date();
-            var distance = new Date(endTime) - now;
+        document.addEventListener("DOMContentLoaded", function () {
+            // Define timer variable globally
+            var timer;
 
-            // Calculating remaining time
-            var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-            var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            // Function to update the countdown timer
+            function updateCountdown(endTime) {
+                var now = new Date();
+                var distance = new Date(endTime) - now;
 
-            // Displaying the countdown timer
-            document.getElementById("countdown").innerHTML = days + "d " + hours + "h "
-                + minutes + "m " + seconds + "s ";
+                if (distance < 0) {
+                    clearInterval(timer);
+                    document.getElementById("countdown").innerHTML = "EXPIRED";
+                    disableCheckoutButton(true); // Disable the button
+                    return;
+                }
 
-            // If the countdown is over, display a message
-            if (distance < 0) {
-                clearInterval(timer);
-                document.getElementById("countdown").innerHTML = "EXPIRED";
+                // Enable the button if the countdown is active
+                disableCheckoutButton(false);
+
+                var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                document.getElementById("countdown").innerHTML = days + "d " + hours + "h "
+                    + minutes + "m " + seconds + "s ";
             }
-        }
 
-        // Fetching the end datetime from backend using AJAX
-        var eventUrl = "{% url 'get_event_data' %}";
-        fetch(eventUrl)
-            .then(response => response.json())
-            .then(data => {
-                var endTime = data.end_datetime;
-                var timer = setInterval(function () {
+            // Function to enable/disable checkout button
+            function disableCheckoutButton(disable) {
+                var checkoutButton = document.getElementById("checkout-button");
+                checkoutButton.disabled = disable;
+                if (disable) {
+                    checkoutButton.setAttribute("title", "Production is ongoing (hover for more info)");
+                } else {
+                    checkoutButton.removeAttribute("title");
+                }
+            }
+
+            var eventUrl = "{% url 'get_event_data' %}";
+            fetch(eventUrl)
+                .then(response => response.json())
+                .then(data => {
+                    var endTime = data.end_datetime;
+                    // Assign timer variable
+                    timer = setInterval(function () {
+                        updateCountdown(endTime);
+                    }, 1000);
+                    // Initial update to show countdown immediately
                     updateCountdown(endTime);
-                }, 1000);
-            })
-            .catch(error => console.error('Error:', error));
+                })
+                .catch(error => console.error('Error:', error));
+        });
     </script>
+
 
     {% endblock %}
 </body>
