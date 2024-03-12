@@ -1,33 +1,34 @@
 from django.contrib import admin
 from .models import Contact, Photo, Inspo, Video
+from import_export.admin import ImportExportModelAdmin
 
 
 # Override the default site header
 admin.site.site_header = "JUME MEGA WEARS & ACCESSORIES"
 
 
-class PhotoAdmin(admin.ModelAdmin):
+class PhotoAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     list_display = (
         "id",
         "image",
     )
 
 
-class VideoAdmin(admin.ModelAdmin):
+class VideoAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     list_display = (
         "id",
         "video",
     )
 
 
-class InspoAdmin(admin.ModelAdmin):
+class InspoAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     list_display = (
         "id",
         "inspo",
     )
 
 
-class ContactAdmin(admin.ModelAdmin):
+class ContactAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     list_display = (
         "id",
         "name",

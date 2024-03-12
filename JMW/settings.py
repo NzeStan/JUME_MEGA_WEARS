@@ -55,6 +55,7 @@ INSTALLED_APPS = [
     "nysc.apps.NyscConfig",
     "cart.apps.CartConfig",
     "orders.apps.OrdersConfig",
+    "import_export",
     # last
     "django_cleanup.apps.CleanupConfig",
 ]

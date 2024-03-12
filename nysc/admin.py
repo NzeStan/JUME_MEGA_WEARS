@@ -1,9 +1,10 @@
 from django.contrib import admin
 from .models import Product, Measurement, Event
+from import_export.admin import ImportExportModelAdmin
 
 
 @admin.register(Product)
-class ProductAdmin(admin.ModelAdmin):
+class ProductAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     list_display = [
         "id",
         "name",
@@ -25,7 +26,7 @@ class ProductAdmin(admin.ModelAdmin):
 
 
 @admin.register(Measurement)
-class MeasurementAdmin(admin.ModelAdmin):
+class MeasurementAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     list_display = [
         "id",
         "chest",
@@ -38,7 +39,7 @@ class MeasurementAdmin(admin.ModelAdmin):
 
 
 @admin.register(Event)
-class EventAdmin(admin.ModelAdmin):
+class EventAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     list_display = [
         "id",
         "end_datetime",
