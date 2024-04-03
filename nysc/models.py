@@ -28,9 +28,15 @@ class Measurement(models.Model):
     user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, null=True)
     chest = models.IntegerField(null=True)
     shoulder = models.IntegerField(null=True)
+    neck = models.IntegerField(null=True)
     sleeve_length = models.IntegerField(null=True)
+    sleeve_round = models.IntegerField(null=True)
+    top_length = models.IntegerField(null=True)
     waist = models.IntegerField(null=True)
     thigh = models.IntegerField(null=True)
+    ankle = models.IntegerField(null=True)
+    laps = models.IntegerField(null=True)
+    knee = models.IntegerField(null=True)
     trouser_length = models.IntegerField(null=True)
 
     def __str__(self):

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Contact, Photo, Inspo, Video
+from .models import Contact, Photo, Inspo
 from import_export.admin import ImportExportModelAdmin
 
 
@@ -11,13 +11,6 @@ class PhotoAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     list_display = (
         "id",
         "image",
-    )
-
-
-class VideoAdmin(ImportExportModelAdmin, admin.ModelAdmin):
-    list_display = (
-        "id",
-        "video",
     )
 
 
@@ -39,5 +32,4 @@ class ContactAdmin(ImportExportModelAdmin, admin.ModelAdmin):
 
 admin.site.register(Photo, PhotoAdmin)
 admin.site.register(Inspo, InspoAdmin)
-admin.site.register(Video, VideoAdmin)
 admin.site.register(Contact, ContactAdmin)

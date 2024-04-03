@@ -27,6 +27,4 @@ RUN apt-get update \
     && rm -rf /var/lib/apt/lists/*
 RUN pip install --upgrade pip setuptools
 RUN pip install -r requirements.txt
-
-# Copy project
 COPY . .

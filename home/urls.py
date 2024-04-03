@@ -7,7 +7,6 @@ from .views import (
     NzeStan,
     Inspos,
     DetailInspoView,
-    Videos,
     AboutUsView,
     ContactUsView,
 )
@@ -18,7 +17,6 @@ urlpatterns = [
     path("detail_photo/<uuid:pk>/", DetailPhotoView.as_view(), name="detail_photo"),
     path("inspo/", Inspos.as_view(), name="inspo"),
     path("detail_inspo/<uuid:pk>/", DetailInspoView.as_view(), name="detail_inspo"),
-    path("video/", Videos.as_view(), name="video"),
     path("nze_stan/", NzeStan.as_view(), name="nze_stan"),
     path(
         "contact_us_delete/<uuid:pk>",

@@ -13,6 +13,7 @@ from django.urls import reverse_lazy
 from django.contrib.auth import get_user_model
 from nysc.models import Measurement
 from django.db.models import Count, Sum
+from payment.attatch_mail import payment_completed
 
 # Create your views here.
 
@@ -24,7 +25,6 @@ def order_create(request):
         form = OrderCreateForm(request.POST)
         if form.is_valid():
             order = form.save()
-
             current_user = request.user
             measurement = Measurement.objects.get(user=current_user)
 
@@ -38,6 +38,7 @@ def order_create(request):
                     user=current_user,
                 )
             cart.clear()
+            payment_completed(order.id)
             request.session["order_id"] = order.id
             # redirect for payment
             return redirect(reverse("process"))

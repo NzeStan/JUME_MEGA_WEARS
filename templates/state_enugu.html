@@ -15,12 +15,47 @@
         td,
         th {
             border: 1px solid #dddddd;
-            text-align: left;
+            text-align: center;
             padding: 8px;
         }
 
         tr:nth-child(even) {
             background-color: #dddddd;
+        }
+
+        /* Measurement table styles */
+        table.measurement {
+            font-family: 'Roboto Condensed', sans-serif;
+            font-size: 0.8rem;
+            /* Allow table to break across pages */
+            prince-table-layout: auto;
+        }
+
+        table.measurement th,
+        table.measurement td {
+            padding: 0.2rem;
+        }
+
+        table.measurement tr {
+            /* Repeat table header on each new page */
+            prince-header-row: repeat(1);
+        }
+
+        /* Adjust PDF page size and orientation */
+        @page {
+            size: A4 landscape;
+        }
+
+        /* Make the measurement table responsive */
+        @media (max-width: 767px) {
+            table.measurement {
+                font-size: 0.7rem;
+            }
+
+            table.measurement th,
+            table.measurement td {
+                padding: 0.1rem;
+            }
         }
     </style>
 </head>
@@ -72,22 +107,47 @@
             {% endfor %}
         </tbody>
     </table>
-    <br>
-    <table>
-        {% for order_measure in order_items %}
-        {% if order_measure.measurement and order_measure.product.id == 1%}
-        <tr>
 
-            <td>{{order_measure.order.id}}</td>
-            <td>{{order_measure.measurement.chest}}</td>
-            <td>{{order_measure.measurement.shoulder}}</td>
-            <td>{{order_measure.measurement.sleeve_length}}</td>
-            <td>{{order_measure.measurement.waist}}</td>
-            <td>{{order_measure.measurement.thigh}}</td>
-            <td>{{order_measure.measurement.trouser_length}}</td>
-        </tr>
-        {%endif%}
-        {%endfor%}
+    <h1>MEASUREMENT</h1>
+    <table class="measurement">
+        <thead>
+            <tr>
+                <th>ORDER ID</th>
+                <th>CHEST</th>
+                <th>SHOULDER</th>
+                <th>NECK</th>
+                <th>SLEEVE LENGTH</th>
+                <th>SLEEVE ROUND</th>
+                <th>TOP LENGTH</th>
+                <th>WAIST</th>
+                <th>THIGH</th>
+                <th>ANKLE</th>
+                <th>LAPS</th>
+                <th>KNEE</th>
+                <th>TROUSER LENGTH</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for order_measure in order_items %}
+            {% if order_measure.measurement and order_measure.order.paid == True %}
+            <tr>
+                <td>{{ order_measure.order.id }}</td>
+                <td>{{ order_measure.measurement.chest }}</td>
+                <td>{{ order_measure.measurement.shoulder }}</td>
+                <td>{{ order_measure.measurement.neck }}</td>
+                <td>{{ order_measure.measurement.sleeve_length }}</td>
+                <td>{{ order_measure.measurement.sleeve_round }}</td>
+                <td>{{ order_measure.measurement.top_length }}</td>
+                <td>{{ order_measure.measurement.waist }}</td>
+                <td>{{ order_measure.measurement.thigh }}</td>
+                <td>{{ order_measure.measurement.ankle }}</td>
+                <td>{{ order_measure.measurement.laps }}</td>
+                <td>{{ order_measure.measurement.knee }}</td>
+                <td>{{ order_measure.measurement.trouser_length }}</td>
+            </tr>
+            {% endif %}
+            {% endfor %}
+        </tbody>
     </table>
 </body>
 

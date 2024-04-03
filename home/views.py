@@ -1,6 +1,6 @@
 from django.views.generic import ListView, DetailView, DeleteView, TemplateView
 from django.views.generic.edit import CreateView
-from .models import Photo, Contact, Inspo, Video
+from .models import Photo, Contact, Inspo
 from django.urls import reverse_lazy
 
 
@@ -11,7 +11,7 @@ class HomeCreateView(TemplateView):
 class Photos(ListView):
     model = Photo
     template_name = "photo.html"
-    paginate_by = 6
+    paginate_by = 20
 
 
 class DetailPhotoView(DetailView):
@@ -22,18 +22,12 @@ class DetailPhotoView(DetailView):
 class Inspos(ListView):
     model = Inspo
     template_name = "inspo.html"
-    paginate_by = 6
+    paginate_by = 20
 
 
 class DetailInspoView(DetailView):
     model = Inspo
     template_name = "detail_inspo.html"
-
-
-class Videos(ListView):
-    model = Video
-    template_name = "video.html"
-    paginate_by = 6
 
 
 class NzeStan(ListView):

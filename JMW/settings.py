@@ -31,7 +31,7 @@ SECRET_KEY = env("DJANGO_SECRET_KEY")
 DEBUG = env.bool("DJANGO_DEBUG")
 
 ALLOWED_HOSTS = ["localhost", "127.0.0.1", ".ngrok-free.app", "0.0.0.0"]
-CSRF_TRUSTED_ORIGINS = ["https://14ad-105-120-130-4.ngrok-free.app"]
+CSRF_TRUSTED_ORIGINS = ["https://bcc9-105-113-32-147.ngrok-free.app"]
 
 
 # Application definition
@@ -174,7 +174,13 @@ ACCOUNT_SIGNUP_PASSWORD_ENTER_TWICE = False
 ACCOUNT_AUTHENTICATION_METHOD = "email"
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_UNIQUE_EMAIL = True
-EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+# Email backend
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_HOST = "smtp.gmail.com"
+EMAIL_HOST_USER = "jumemegawears@gmail.com"
+EMAIL_HOST_PASSWORD = "fojhgvufvqltjolz"
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
 # Cloudinary settings
 CLOUDINARY_STORAGE = {
     "CLOUD_NAME": env("CLOUD_NAME"),

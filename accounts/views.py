@@ -1,4 +1,4 @@
-from django.views.generic.edit import CreateView, UpdateView
+from django.views.generic.edit import UpdateView
 from django.urls import reverse_lazy
 from django.contrib.auth import get_user_model
 

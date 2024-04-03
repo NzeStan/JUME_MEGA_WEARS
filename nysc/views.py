@@ -53,9 +53,15 @@ class CreateMeasurementView(CreateView):
     fields = [
         "chest",
         "shoulder",
+        "neck",
         "sleeve_length",
+        "sleeve_round",
+        "top_length",
         "waist",
         "thigh",
+        "ankle",
+        "laps",
+        "knee",
         "trouser_length",
     ]
     success_url = reverse_lazy("product_list")
@@ -77,9 +83,15 @@ class UpdateMeasurementView(UpdateView):
     fields = [
         "chest",
         "shoulder",
+        "neck",
         "sleeve_length",
+        "sleeve_round",
+        "top_length",
         "waist",
         "thigh",
+        "ankle",
+        "laps",
+        "knee",
         "trouser_length",
     ]
     success_url = reverse_lazy("nysc_landing")

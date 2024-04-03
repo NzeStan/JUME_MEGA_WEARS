@@ -2,10 +2,85 @@
 
 {% block content %}
 
-<form method="post">
+
+<form method="post" class="max-w-sm mx-auto">
     {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Update</button>
+    <div class="mb-5">
+        <label for="id_chest" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Chest
+            (inches)</label>
+        <input type="number" id="id_chest" name="chest" value="{{measurement.chest}}"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+    </div>
+    <div class="mb-5">
+        <label for="id_shoulder" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Shoulder
+            (inches)</label>
+        <input type="number" id="id_shoulder" name="shoulder" value="{{measurement.shoulder}}"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+    </div>
+    <div class="mb-5">
+        <label for="id_neck" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Neck (inches)</label>
+        <input type="number" id="id_neck" name="neck" value="{{measurement.neck}}"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+    </div>
+    <div class="mb-5">
+        <label for="id_sleeve_length" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Sleeve
+            Length (inches)</label>
+        <input type="number" id="id_sleeve_length" name="sleeve_length" value="{{measurement.sleeve_length}}"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+    </div>
+    <div class="mb-5">
+        <label for="id_sleeve_round" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Sleeve
+            Round (inches)</label>
+        <input type="number" id="id_sleeve_round" name="sleeve_round" value="{{measurement.sleeve_round}}"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+    </div>
+    <div class="mb-5">
+        <label for="id_top_length" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Top
+            Length (inches)</label>
+        <input type="number" id="id_top_length" name="top_length" value="{{measurement.top_length}}"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+    </div>
+    <div class="mb-5">
+        <label for="id_waist" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Waist
+            (inches)</label>
+        <input type="number" id="id_waist" name="waist" value="{{measurement.waist}}"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+    </div>
+    <div class="mb-5">
+        <label for="id_thigh" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Thigh
+            (inches)</label>
+        <input type="number" id="id_thigh" name="thigh" value="{{measurement.thigh}}"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+    </div>
+    <div class="mb-5">
+        <label for="id_ankle" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Ankle
+            (inches)</label>
+        <input type="number" id="id_ankle" name="ankle" value="{{measurement.ankle}}"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+    </div>
+    <div class="mb-5">
+        <label for="id_laps" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Laps (inches)</label>
+        <input type="number" id="id_laps" name="laps" value="{{measurement.laps}}"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+    </div>
+    <div class="mb-5">
+        <label for="id_knee" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Knee (inches)</label>
+        <input type="number" id="id_knee" name="knee" value="{{measurement.knee}}"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+    </div>
+    <div class="mb-5">
+        <label for="id_trouser_length" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Trouser
+            Length (inches)</label>
+        <input type="number" id="id_trouser_length" name="trouser_length" value="{{measurement.trouser_length}}"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+    </div>
+
+    <br>
+    <button type="submit"
+        class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Update</button>
 </form>
 
 {% endblock content %}
+{% block absolute_links %}
+
+{% endblock absolute_links %}

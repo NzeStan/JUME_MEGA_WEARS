@@ -2,8 +2,14 @@
 {% block title %}Log Out{% endblock %}
 {% block content %}
 <div class="grid justify-items-center">
-    <h1>Log Out</h1>
+    <h1 class="text-2xl font-semibold">Log Out</h1>
+    <br>
+    <br>
     <p>Are you sure you want to log out?</p>
+    <br>
+    <br>
+    <br>
+    <br>
     <form method="post" action="{% url 'account_logout' %}">
         {% csrf_token %}
         {{ form.as_p }}
