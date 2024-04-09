@@ -2,15 +2,15 @@ from django.views.generic import ListView, DetailView, TemplateView
 from django.views.generic.edit import CreateView, UpdateView
 from .models import Product, Measurement, Event
 from cart.forms import CartAddProductForm
-from orders.models import Order
 from django.urls import reverse_lazy
-from django.http.response import HttpResponseRedirect
 from django.urls import reverse
 from django.shortcuts import render
 from django.views.generic import DetailView
 from django.utils import timezone
 from django.core.serializers import serialize
 from django.http import JsonResponse
+from django.shortcuts import render, get_object_or_404
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 
 class ProductList(ListView):
@@ -48,7 +48,7 @@ class NyscLandingPage(TemplateView):
         return context
 
 
-class CreateMeasurementView(CreateView):
+class CreateMeasurementView(LoginRequiredMixin, CreateView):
     model = Measurement
     fields = [
         "chest",

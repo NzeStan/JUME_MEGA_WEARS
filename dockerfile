@@ -4,8 +4,10 @@ FROM python:3.10.4-slim-bullseye
 ENV PIP_DISABLE_PIP_VERSION_CHECK 1
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
+
 # Set work directory
 WORKDIR /code
+
 # Install dependencies
 COPY ./requirements.txt .
 RUN apt-get update && apt-get install -y libmagic-dev
@@ -25,6 +27,7 @@ RUN apt-get update \
     shared-mime-info \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
+
 RUN pip install --upgrade pip setuptools
 RUN pip install -r requirements.txt
 COPY . .

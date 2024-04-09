@@ -20,7 +20,7 @@
                 <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">{{product.description}}</p>
                 <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{product.price}}</h5>
                 {% ratings product icon_height=24 icon_width=24 %}
-                {% if product.id == 1 %}
+                {% if product.type == "kakhi" %}
                 {% if user_measurement %}
                 <form action="{% url 'cart_add' product.id %}" method="post" class="flex flex-row items-center">
                     <div class="mr-4">

@@ -31,7 +31,7 @@ SECRET_KEY = env("DJANGO_SECRET_KEY")
 DEBUG = env.bool("DJANGO_DEBUG")
 
 ALLOWED_HOSTS = ["localhost", "127.0.0.1", ".ngrok-free.app", "0.0.0.0"]
-CSRF_TRUSTED_ORIGINS = ["https://bcc9-105-113-32-147.ngrok-free.app"]
+CSRF_TRUSTED_ORIGINS = ["https://d246-105-120-128-96.ngrok-free.app"]
 
 
 # Application definition
@@ -175,10 +175,13 @@ ACCOUNT_AUTHENTICATION_METHOD = "email"
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_UNIQUE_EMAIL = True
 # Email backend
-EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+if DEBUG:
+    EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+else:
+    EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 EMAIL_HOST = "smtp.gmail.com"
 EMAIL_HOST_USER = "jumemegawears@gmail.com"
-EMAIL_HOST_PASSWORD = "fojhgvufvqltjolz"
+EMAIL_HOST_PASSWORD = env("EMAIL_HOST_PASSWORD")
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 # Cloudinary settings
@@ -210,3 +213,11 @@ DEFAULT_FROM_EMAIL = "jumemegawears@gmail.com"
 # Review
 STAR_RATINGS_RERATE_SAME_DELETE = True
 STAR_RATINGS_CLEARABLE = True
+
+# deployment
+SECURE_SSL_REDIRECT = env.bool("DJANGO_SECURE_SSL_REDIRECT")
+SECURE_HSTS_SECONDS = env.int("DJANGO_SECURE_HSTS_SECONDS")
+SECURE_HSTS_INCLUDE_SUBDOMAINS = env.bool("DJANGO_SECURE_HSTS_INCLUDE_SUBDOMAINS")
+SECURE_HSTS_PRELOAD = env.bool("DJANGO_SECURE_HSTS_PRELOAD")
+SESSION_COOKIE_SECURE = env.bool("DJANGO_SESSION_COOKIE_SECURE")
+CSRF_COOKIE_SECURE = env.bool("DJANGO_CSRF_COOKIE_SECURE")

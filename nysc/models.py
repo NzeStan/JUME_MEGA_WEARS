@@ -13,6 +13,7 @@ class Product(models.Model):
     available = models.BooleanField(default=True)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
+    type = models.CharField(max_length=50, default="vest")
 
     def __str__(self):
         return self.name

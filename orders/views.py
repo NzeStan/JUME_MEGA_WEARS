@@ -21,30 +21,36 @@ from payment.attatch_mail import payment_completed
 @login_required
 def order_create(request):
     cart = Cart(request)
+    form = OrderCreateForm()  # Initialize form outside the request method check
+
     if request.method == "POST":
-        form = OrderCreateForm(request.POST)
+        form = OrderCreateForm(request.POST)  # Re-initialize form with POST data
         if form.is_valid():
             order = form.save()
             current_user = request.user
-            measurement = Measurement.objects.get(user=current_user)
+            try:
+                measurement = Measurement.objects.get(user=current_user)
+            except Measurement.DoesNotExist:
+                measurement = None
 
             for item in cart:
-                OrderItem.objects.create(
-                    order=order,
-                    product=item["product"],
-                    price=item["price"],
-                    quantity=item["quantity"],
-                    measurement_id=measurement.id,
-                    user=current_user,
-                )
+                order_item_data = {
+                    "order": order,
+                    "product": item["product"],
+                    "price": item["price"],
+                    "quantity": item["quantity"],
+                    "user": current_user,
+                }
+                if measurement:
+                    order_item_data["measurement_id"] = measurement.id
+
+                OrderItem.objects.create(**order_item_data)
+
             cart.clear()
             payment_completed(order.id)
             request.session["order_id"] = order.id
-            # redirect for payment
             return redirect(reverse("process"))
 
-    else:
-        form = OrderCreateForm()
     return render(request, "create.html", {"cart": cart, "form": form})
 
 

@@ -223,7 +223,7 @@
         </div>
         <!-- WhatsApp icon -->
         <div>
-            <a class="grid justify-center whatsapp-icon" href="https://wa.link/hgadxf">
+            <a class="grid justify-center whatsapp-icon" href="https://wa.link/hgadxf" target="_blank">
                 <img width="120px" height="120px"
                     src="https://res.cloudinary.com/dhhaiy58r/image/upload/v1704207702/WhatsApp-Logo.wine_nbsnhs.png"
                     alt="WhatsApp_LOGO">
@@ -247,40 +247,24 @@
 
             // Get the checkout button element
             var checkoutButton = document.getElementById("checkout-button");
-
-            // Enable the checkout button by default
-            if (checkoutButton) {
-                checkoutButton.disabled = false;
-                checkoutButton.removeAttribute("title");
-                console.log("Checkout button enabled by default.");
-            } else {
-                console.log("Checkout button element not found.");
-            }
+            var countdownElement = document.getElementById("countdown");
 
             // Function to update the countdown timer
             function updateCountdown(endTime) {
                 var now = new Date();
                 var distance = new Date(endTime) - now;
-                var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-                var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-                var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-                var countdownElement = document.getElementById("countdown");
-                if (countdownElement) {
-                    countdownElement.innerHTML = days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
-
-                    if (distance < 0) {
-                        console.log("Countdown expired.");
-                        clearInterval(timer);
-                        countdownElement.innerHTML = "EXPIRED";
-                        disableCheckoutButton(true); // Disable the button when countdown expires
-                    } else {
-                        console.log("Countdown active. Distance remaining:", distance);
-                        disableCheckoutButton(false); // Enable the button when countdown is active
-                    }
+                if (distance > 0) {
+                    console.log("Countdown active. Distance remaining:", distance);
+                    disableCheckoutButton(false); // Enable the button when countdown is active
+                    updateTimerUI(distance); // Update the countdown timer UI
                 } else {
-                    console.log("Element with ID 'countdown' not found.");
+                    console.log("Countdown expired.");
+                    clearInterval(timer);
+                    disableCheckoutButton(true); // Disable the button when countdown expires
+                    if (countdownElement) {
+                        countdownElement.innerHTML = "EXPIRED"; // Update the countdown element with "EXPIRED"
+                    }
                 }
             }
 
@@ -297,6 +281,19 @@
                     }
                 } else {
                     console.log("Checkout button element not found.");
+                }
+            }
+
+            // Function to update the countdown timer UI
+            function updateTimerUI(distance) {
+                if (countdownElement) {
+                    var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                    var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                    var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+                    countdownElement.innerHTML = days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
+                } else {
+                    console.log("Countdown element not found.");
                 }
             }
 
@@ -318,22 +315,29 @@
         });
     </script>
     <script>
-        const modal = document.getElementById('static-modal');
+        // Get the modal elements
+        const modals = document.querySelectorAll('.static-modal');
 
-        // Show modal after 5 seconds
-        setTimeout(() => {
-            modal.classList.remove('hidden');
-        }, 5000); // 5000 milliseconds = 5 seconds
+        modals.forEach(modal => {
+            // Show the modal after 5 seconds
+            const showModalTimeout = setTimeout(() => {
+                modal.classList.remove('hidden');
+            }, 5000);
 
-        const closeModalButton = document.querySelector('[data-modal-hide="static-modal"]');
-        closeModalButton.addEventListener('click', () => {
-            modal.classList.add('hidden');
-        });
+            // Add event listeners to close the modal
+            const closeButtons = modal.querySelectorAll('.close-modal-btn');
+            closeButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    clearTimeout(showModalTimeout);
+                    modal.classList.add('hidden');
+                });
+            });
 
-        window.addEventListener('click', (event) => {
-            if (event.target === modal) {
+            const cancelButton = modal.querySelector('.cancel-btn');
+            cancelButton.addEventListener('click', () => {
+                clearTimeout(showModalTimeout);
                 modal.classList.add('hidden');
-            }
+            });
         });
     </script>
     {% endblock %}
