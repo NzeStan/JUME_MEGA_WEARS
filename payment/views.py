@@ -9,7 +9,10 @@ from orders.models import Order
 from decimal import Decimal
 
 # create the Paystack instance
-api_key = settings.PAYSTACK_TEST_SECRETE_KEY
+if settings.DEBUG:
+    api_key = settings.PAYSTACK_TEST_SECRETE_KEY
+else:
+    api_key = settings.PAYSTACK_LIVE_SECRETE_KEY
 url = settings.PAYSTACK_INITIALIZE_PAYMENT_URL
 
 
