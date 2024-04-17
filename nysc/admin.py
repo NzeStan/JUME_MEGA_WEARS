@@ -16,6 +16,7 @@ class ProductAdmin(ImportExportModelAdmin, admin.ModelAdmin):
         "type",
     ]
     list_filter = [
+        "type",
         "available",
         "created",
         "updated",
