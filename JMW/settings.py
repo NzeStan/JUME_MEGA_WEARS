@@ -33,7 +33,7 @@ DEBUG = env.bool("DJANGO_DEBUG", default=False)
 if DEBUG:
     ALLOWED_HOSTS = ["localhost", "127.0.0.1", ".ngrok-free.app", "0.0.0.0"]
 else:
-    ALLOWED_HOSTS = ["quiet-fortress-74704.herokuapp.com"]
+    ALLOWED_HOSTS = ["pure-sierra-23040.herokuapp.com"]
 
 # CSRF_TRUSTED_ORIGINS = ["https://d246-105-120-128-96.ngrok-free.app"]
 
