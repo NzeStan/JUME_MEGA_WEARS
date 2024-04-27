@@ -5,6 +5,12 @@ from django.contrib.auth import get_user_model
 
 # Create your models here.
 class Product(models.Model):
+    TYPE_CHOICES = [
+        ("kakhi", "kakhi"),
+        ("vest", "vest"),
+        ("cap", "cap"),
+        # Add more choices as needed
+    ]
     name = models.CharField(max_length=200)
     image = models.ImageField(upload_to="jume_nysc_products", blank=True)
     description = models.TextField(blank=True)
@@ -13,7 +19,7 @@ class Product(models.Model):
     available = models.BooleanField(default=True)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
-    type = models.CharField(max_length=50, default="vest")
+    type = models.CharField(max_length=20, choices=TYPE_CHOICES)
 
     def __str__(self):
         return self.name
