@@ -10,7 +10,8 @@ from .attatch_mail import payment_completed
 if settings.DEBUG:
     secret = settings.PAYSTACK_TEST_SECRETE_KEY
 else:
-    secret = settings.PAYSTACK_LIVE_SECRETE_KEY
+    # secret = settings.PAYSTACK_LIVE_SECRETE_KEY
+    secret = settings.PAYSTACK_TEST_SECRETE_KEY
 
 
 @csrf_exempt

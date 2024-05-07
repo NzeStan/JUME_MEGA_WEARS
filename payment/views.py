@@ -12,7 +12,8 @@ from decimal import Decimal
 if settings.DEBUG:
     api_key = settings.PAYSTACK_TEST_SECRETE_KEY
 else:
-    api_key = settings.PAYSTACK_LIVE_SECRETE_KEY
+    # api_key = settings.PAYSTACK_LIVE_SECRETE_KEY
+    api_key = settings.PAYSTACK_TEST_SECRETE_KEY
 url = settings.PAYSTACK_INITIALIZE_PAYMENT_URL
 
 
