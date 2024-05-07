@@ -13,6 +13,8 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 from pathlib import Path
 from environs import Env
 
+import dj_database_url
+
 env = Env()
 env.read_env()
 
@@ -29,7 +31,7 @@ SECRET_KEY = env("DJANGO_SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env.bool("DJANGO_DEBUG", default=False)
-
+print(DEBUG)
 
 ALLOWED_HOSTS = ["*"]
 
@@ -100,15 +102,7 @@ WSGI_APPLICATION = "JMW.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
-# DATABASES = {
-#     "default": env.dj_db_url("DATABASE_URL", default="postgres://postgres@db/postgres")
-# }
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
-    }
-}
+DATABASES = {"default": dj_database_url.config("DATABASE_URL", conn_max_age=600)}
 
 
 # Password validation
