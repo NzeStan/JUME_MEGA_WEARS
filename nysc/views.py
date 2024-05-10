@@ -103,7 +103,6 @@ class UpdateMeasurementView(UpdateView):
         return super(UpdateMeasurementView, self).form_valid(form)
 
 
-"""
 class EventDetailView(DetailView):
     model = Event
     template_name = "nysc_landing.html"
@@ -126,5 +125,3 @@ def get_event_data(request):
         "end_datetime": event.end_datetime.isoformat(),
     }
     return JsonResponse(data)
-
-"""
