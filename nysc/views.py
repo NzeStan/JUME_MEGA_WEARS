@@ -121,7 +121,14 @@ class EventDetailView(DetailView):
 
 def get_event_data(request):
     event = Event.objects.first()
-    data = {
-        "end_datetime": event.end_datetime.isoformat(),
-    }
+    if event:
+        data = {
+            "end_datetime": event.end_datetime.isoformat(),
+            "has_event": True,
+        }
+    else:
+        data = {
+            "end_datetime": None,
+            "has_event": False,
+        }
     return JsonResponse(data)

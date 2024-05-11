@@ -241,10 +241,8 @@
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             console.log("DOM content loaded.");
-
             // Define timer variable globally
             var timer;
-
             // Get the checkout button element
             var checkoutButton = document.getElementById("checkout-button");
             var countdownElement = document.getElementById("countdown");
@@ -253,7 +251,6 @@
             function updateCountdown(endTime) {
                 var now = new Date();
                 var distance = new Date(endTime) - now;
-
                 if (distance > 0) {
                     console.log("Countdown active. Distance remaining:", distance);
                     disableCheckoutButton(false); // Enable the button when countdown is active
@@ -298,18 +295,25 @@
             }
 
             var eventUrl = "{% url 'get_event_data' %}";
-
             fetch(eventUrl)
                 .then(response => response.json())
                 .then(data => {
-                    var endTime = data.end_datetime;
-                    console.log("End time fetched:", endTime);
-                    // Assign timer variable
-                    timer = setInterval(function () {
+                    if (data.has_event) {
+                        var endTime = data.end_datetime;
+                        console.log("End time fetched:", endTime);
+                        // Assign timer variable
+                        timer = setInterval(function () {
+                            updateCountdown(endTime);
+                        }, 1000);
+                        // Initial update to show countdown immediately
                         updateCountdown(endTime);
-                    }, 1000);
-                    // Initial update to show countdown immediately
-                    updateCountdown(endTime);
+                    } else {
+                        console.log("No event found.");
+                        disableCheckoutButton(true); // Disable the button when no event is found
+                        if (countdownElement) {
+                            countdownElement.innerHTML = "No event scheduled.";
+                        }
+                    }
                 })
                 .catch(error => console.error('Error:', error));
         });
