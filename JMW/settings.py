@@ -33,7 +33,12 @@ SECRET_KEY = env("DJANGO_SECRET_KEY")
 DEBUG = env.bool("DJANGO_DEBUG", default=False)
 
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = [
+    "jume-mega-wears-main.onrender.com",
+    "jume-mega-wears.onrender.com",
+    "localhost",
+    "127.0.0.1",
+]
 
 # CSRF_TRUSTED_ORIGINS = ["https://d246-105-120-128-96.ngrok-free.app"]
 
