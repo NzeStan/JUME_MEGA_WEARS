@@ -179,10 +179,13 @@ ACCOUNT_AUTHENTICATION_METHOD = "email"
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_UNIQUE_EMAIL = True
 # Email backend
+"""
 if DEBUG:
     EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 else:
     EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+"""
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 EMAIL_HOST = "smtp.gmail.com"
 EMAIL_HOST_USER = "jumemegawears@gmail.com"
 EMAIL_HOST_PASSWORD = env("EMAIL_HOST_PASSWORD")
@@ -203,12 +206,16 @@ DEFAULT_FILE_STORAGE = "cloudinary_storage.storage.MediaCloudinaryStorage"
 CART_SESSION_ID = "cart"
 
 # paystack
+"""
 if DEBUG:
     PAYSTACK_TEST_SECRETE_KEY = env("PAYSTACK_TEST_SECRETE_KEY")
     PAYSTACK_TEST_PUBLIC_KEY = env("PAYSTACK_TEST_PUBLIC_KEY")
 else:
     PAYSTACK_LIVE_SECRETE_KEY = env("PAYSTACK_LIVE_SECRETE_KEY")
     PAYSTACK_LIVE_PUBLIC_KEY = env("PAYSTACK_LIVE_PUBLIC_KEY")
+"""
+PAYSTACK_TEST_SECRETE_KEY = env("PAYSTACK_TEST_SECRETE_KEY")
+PAYSTACK_TEST_PUBLIC_KEY = env("PAYSTACK_TEST_PUBLIC_KEY")
 PAYSTACK_INITIALIZE_PAYMENT_URL = "https://api.paystack.co/transaction/initialize"
 
 ACCOUNT_FORMS = {
