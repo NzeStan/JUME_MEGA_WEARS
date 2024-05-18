@@ -1,6 +1,6 @@
 from django.views.generic import ListView, DetailView, TemplateView
 from django.views.generic.edit import CreateView, UpdateView
-from .models import Product, Measurement, Event
+from .models import Product, Measurement
 from cart.forms import CartAddProductForm
 from django.urls import reverse_lazy
 from django.urls import reverse
@@ -101,34 +101,3 @@ class UpdateMeasurementView(UpdateView):
         instance = form.save(commit=False)
         instance.user = self.request.user
         return super(UpdateMeasurementView, self).form_valid(form)
-
-
-class EventDetailView(DetailView):
-    model = Event
-    template_name = "nysc_landing.html"
-    context_object_name = "event"
-
-    def get_object(self, queryset=None):
-        return Event.objects.first()
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        event = self.get_object()
-        context["event_json"] = serialize("json", [event])
-        context["current_datetime"] = timezone.now().isoformat()
-        return context
-
-
-def get_event_data(request):
-    event = Event.objects.first()
-    if event:
-        data = {
-            "end_datetime": event.end_datetime.isoformat(),
-            "has_event": True,
-        }
-    else:
-        data = {
-            "end_datetime": None,
-            "has_event": False,
-        }
-    return JsonResponse(data)

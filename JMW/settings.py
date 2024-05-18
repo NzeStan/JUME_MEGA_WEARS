@@ -32,13 +32,13 @@ SECRET_KEY = env("DJANGO_SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env.bool("DJANGO_DEBUG", default=False)
 
-
-ALLOWED_HOSTS = [
-    "jume-mega-wears-main.onrender.com",
-    "jume-mega-wears.onrender.com",
-    "localhost",
-    "127.0.0.1",
-]
+# ALLOWED_HOSTS = [
+#     "jume-mega-wears-main.onrender.com",
+#     "jume-mega-wears.onrender.com",
+#     "localhost",
+#     "127.0.0.1",
+# ]
+ALLOWED_HOSTS = ["*"]
 
 # CSRF_TRUSTED_ORIGINS = ["https://d246-105-120-128-96.ngrok-free.app"]
 
@@ -65,6 +65,7 @@ INSTALLED_APPS = [
     "nysc.apps.NyscConfig",
     "cart.apps.CartConfig",
     "orders.apps.OrdersConfig",
+    "payment.apps.PaymentConfig",
     "import_export",
     # last
     "django_cleanup.apps.CleanupConfig",
@@ -81,6 +82,7 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "allauth.account.middleware.AccountMiddleware",
 ]
+
 
 ROOT_URLCONF = "JMW.urls"
 

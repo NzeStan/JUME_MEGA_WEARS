@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Product, Measurement, Event
+from .models import Product, Measurement
 from import_export.admin import ImportExportModelAdmin
 
 
@@ -37,12 +37,4 @@ class MeasurementAdmin(ImportExportModelAdmin, admin.ModelAdmin):
         "waist",
         "thigh",
         "trouser_length",
-    ]
-
-
-@admin.register(Event)
-class EventAdmin(ImportExportModelAdmin, admin.ModelAdmin):
-    list_display = [
-        "id",
-        "end_datetime",
     ]

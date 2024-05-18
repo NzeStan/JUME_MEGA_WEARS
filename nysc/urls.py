@@ -5,8 +5,6 @@ from .views import (
     NyscLandingPage,
     CreateMeasurementView,
     UpdateMeasurementView,
-    EventDetailView,
-    get_event_data,
 )
 
 
@@ -24,6 +22,4 @@ urlpatterns = [
         UpdateMeasurementView.as_view(),
         name="update_measurement",
     ),
-    path("events/", EventDetailView.as_view(), name="event_detail"),
-    path("get_event_data/", get_event_data, name="get_event_data"),
 ]
