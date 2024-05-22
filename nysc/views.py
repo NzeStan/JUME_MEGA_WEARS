@@ -101,3 +101,7 @@ class UpdateMeasurementView(UpdateView):
         instance = form.save(commit=False)
         instance.user = self.request.user
         return super(UpdateMeasurementView, self).form_valid(form)
+
+
+class ComingSoon(TemplateView):
+    template_name = "coming_soon.html"

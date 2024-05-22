@@ -84,6 +84,7 @@
                             class="block py-2 pl-3 pr-4 text-gray-700 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-green-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">NzeStan</a>
                     </li>
                     {% endif %}
+                    <!--
                     {% if user.is_authenticated %}
                     <li>
                         <a href="{% url 'account_logout'%}"
@@ -117,6 +118,7 @@
                             up</a>
                     </li>
                     {% endif %}
+                    -->
                 </ul>
             </div>
         </div>
@@ -214,13 +216,15 @@
     <!-- Absolute links -->
     <div class="fixed bottom-40 right-2 z-50 flex flex-col items-center">
         <!-- NYSC logo -->
+
         <div class="mb-4">
-            <a href="{% url 'nysc_landing' %}">
+            <a href="{% url 'coming' %}">
                 <img width="50px" height="50px"
                     src="https://res.cloudinary.com/dhhaiy58r/image/upload/v1690401957/image/NYSC_LOGO.svg_yfwrlp.png"
                     alt="NYSC_LOGO">
             </a>
         </div>
+
         <!-- WhatsApp icon -->
         <div>
             <a class="grid justify-center whatsapp-icon" href="https://wa.link/hgadxf" target="_blank">

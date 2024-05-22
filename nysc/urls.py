@@ -5,6 +5,7 @@ from .views import (
     NyscLandingPage,
     CreateMeasurementView,
     UpdateMeasurementView,
+    ComingSoon,
 )
 
 
@@ -22,4 +23,5 @@ urlpatterns = [
         UpdateMeasurementView.as_view(),
         name="update_measurement",
     ),
+    path("coming_soon_nysc/", ComingSoon.as_view(), name="coming"),
 ]
