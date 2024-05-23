@@ -13,21 +13,26 @@
     <div class="h-[46px] w-[3px] bg-gray-800 absolute -left-[17px] top-[178px] rounded-l-lg"></div>
     <div class="h-[64px] w-[3px] bg-gray-800 absolute -right-[17px] top-[142px] rounded-r-lg"></div>
     <div class="rounded-[2rem] overflow-hidden w-[272px] h-[572px] bg-white dark:bg-gray-800">
+        {% if photo.image %}
         <img src="{{ photo.image.url }}" class="dark:hidden w-[272px] h-[572px]" alt="Photo_details">
+        {% else %}
+        <p>No image available</p>
+        {% endif %}
     </div>
     <br>
+    {% if photo.image %}
     <a class="grid justify-center whatsapp-icon" href="#"
         onclick="sendWhatsAppMessage('{{ photo.image.url }}'); return false;">
         <img width="100px" height="100px"
             src="https://res.cloudinary.com/dhhaiy58r/image/upload/v1704207702/WhatsApp-Logo.wine_nbsnhs.png"
             alt="whatsapp_LOGO">
     </a>
+    {% endif %}
 </div>
 <br>
 <br>
 <br>
 <br>
-
 {% endblock content %}
 
 {% block absolute_links %}

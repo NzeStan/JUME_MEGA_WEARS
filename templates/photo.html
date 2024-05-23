@@ -1,23 +1,17 @@
 {% extends "_base.html" %}
 
 {% block content %}
-
-
-
 <div class="grid grid-auto-fit-[100px] gap-10 mb-4">
     {% for photo in object_list %}
     <div style="padding-bottom: 20px;">
-        <a href="{{photo.get_absolute_url}}"><img class="min-h-full  rounded-lg" src="{{photo.image.url}}" alt=""></a>
+        {% if photo.image %}
+        <a href="{{ photo.get_absolute_url }}"><img class="min-h-full rounded-lg" src="{{ photo.image.url }}"
+                alt=""></a>
+        {% else %}
+        <p>No image available</p>
+        {% endif %}
     </div>
     {% endfor %}
-
 </div>
-
 {% include "pagination.html" with page=page_obj %}
-
-
-
 {% endblock content %}
-{% block absolute_links %}
-
-{% endblock absolute_links %}
