@@ -8,10 +8,14 @@
         <a href="{{ photo.get_absolute_url }}"><img class="min-h-full rounded-lg" src="{{ photo.image.url }}"
                 alt=""></a>
         {% else %}
-        <p>No image available</p>
+        <img src="https://res.cloudinary.com/dhhaiy58r/image/upload/v1716475069/media/jume_images/thumbnail_asocbc.svg"
+            class="rounded-[2rem] w-full h-full object-cover" alt="No image available">
         {% endif %}
     </div>
     {% endfor %}
 </div>
 {% include "pagination.html" with page=page_obj %}
 {% endblock content %}
+{% block absolute_links %}
+
+{% endblock absolute_links %}

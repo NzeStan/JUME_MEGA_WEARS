@@ -6,36 +6,30 @@
         class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Back</button>
 </a>
 
-<div
-    class="relative mx-auto border-gray-800 dark:border-gray-800 bg-gray-800 border-[14px] rounded-[2.5rem] h-[600px] w-[300px] shadow-xl">
-    <div class="w-[148px] h-[18px] bg-gray-800 top-0 rounded-b-[1rem] left-1/2 -translate-x-1/2 absolute"></div>
-    <div class="h-[46px] w-[3px] bg-gray-800 absolute -left-[17px] top-[124px] rounded-l-lg"></div>
-    <div class="h-[46px] w-[3px] bg-gray-800 absolute -left-[17px] top-[178px] rounded-l-lg"></div>
-    <div class="h-[64px] w-[3px] bg-gray-800 absolute -right-[17px] top-[142px] rounded-r-lg"></div>
-    <div class="rounded-[2rem] overflow-hidden w-[272px] h-[572px] bg-white dark:bg-gray-800">
-        {% if inspo.inspo %}
-        <img src="{{ inspo.inspo.url }}" class="dark:hidden w-[272px] h-[572px]" alt="inspo_details">
-        {% else %}
-        <p>No image available</p>
-        {% endif %}
-    </div>
-    <br>
+<div class="flex flex-col items-center">
+
     {% if inspo.inspo %}
-    <a class="grid justify-center whatsapp-icon" href="#"
-        onclick="sendWhatsAppMessage('{{ inspo.inspo.url }}'); return false;">
-        <img width="100px" height="100px"
-            src="https://res.cloudinary.com/dhhaiy58r/image/upload/v1704207702/WhatsApp-Logo.wine_nbsnhs.png"
-            alt="whatsapp_LOGO">
-    </a>
+    <img src="{{ inspo.inspo.url }}" class="rounded-[2rem] w-full h-full object-cover" alt="inspo_details">
+    {% else %}
+    <img src="https://res.cloudinary.com/dhhaiy58r/image/upload/v1716475069/media/jume_images/thumbnail_asocbc.svg"
+        class="rounded-[2rem] w-full h-full object-cover" alt="No image available">
     {% endif %}
+</div>
+<br>
+{% if inspo.inspo %}
+<a class="grid justify-center whatsapp-icon" href="#"
+    onclick="sendWhatsAppMessage('{{ inspo.inspo.url }}'); return false;">
+    <img width="100px" height="100px"
+        src="https://res.cloudinary.com/dhhaiy58r/image/upload/v1704207702/WhatsApp-Logo.wine_nbsnhs.png"
+        alt="whatsapp_LOGO">
+</a>
+{% endif %}
 </div>
 <br>
 <br>
 <br>
 <br>
-{% endblock content %}
 
-{% block absolute_links %}
 <script>
     function sendWhatsAppMessage(imageUrl) {
         var phoneNumber = "+2348139425458"; // Replace with your phone number
@@ -44,4 +38,8 @@
         window.location.href = "https://wa.me/" + phoneNumber + "/?text=" + encodeURIComponent(message);
     }
 </script>
+{% endblock content %}
+
+{% block absolute_links %}
+
 {% endblock absolute_links %}
