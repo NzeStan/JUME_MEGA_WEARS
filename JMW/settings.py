@@ -102,7 +102,9 @@ WSGI_APPLICATION = "JMW.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
-DATABASES = {"default": dj_database_url.config("DATABASE_URL", conn_max_age=600)}
+DATABASES = {
+    "default": env.dj_db_url("DATABASE_URL", default="postgres://postgres@db/postgres")
+}
 
 
 # Password validation
