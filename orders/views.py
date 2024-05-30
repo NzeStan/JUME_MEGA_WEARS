@@ -432,7 +432,7 @@ def state_enugu(request):
         "user": request.user,
         "summary_query": summary_query,
     }
-    html = render_to_string("state_Enugu.html", context)
+    html = render_to_string("state_enugu.html", context)
     response = HttpResponse(content_type="application/pdf")
     response["Content-Disposition"] = f"filename=Order_Enugu.pdf"
     weasyprint.HTML(string=html).write_pdf(response)

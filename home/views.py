@@ -12,6 +12,7 @@ class Photos(ListView):
     model = Photo
     template_name = "photo.html"
     paginate_by = 20
+    ordering = ["pk"]
 
 
 class DetailPhotoView(DetailView):
@@ -23,6 +24,7 @@ class Inspos(ListView):
     model = Inspo
     template_name = "inspo.html"
     paginate_by = 20
+    ordering = ["pk"]
 
 
 class DetailInspoView(DetailView):
