@@ -165,7 +165,7 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 AUTH_USER_MODEL = "accounts.CustomUser"
 
 # Compressor settings
-COMPRESS_ROOT = BASE_DIR / "static"
+COMPRESS_ROOT = BASE_DIR / "staticfiles"
 
 COMPRESS_ENABLED = True
 
