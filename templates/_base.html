@@ -247,6 +247,12 @@
 
             // Get the checkout button element
             var checkoutButton = document.getElementById("checkout-button");
+            if (checkoutButton) {
+                console.log("Checkout button found.");
+            } else {
+                console.log("Checkout button element not found.");
+            }
+
             var countdownElement = document.getElementById("countdown");
 
             // Function to update the countdown timer
@@ -313,6 +319,7 @@
                 })
                 .catch(error => console.error('Error:', error));
         });
+
     </script>
     <script>
         // Get the modal elements
