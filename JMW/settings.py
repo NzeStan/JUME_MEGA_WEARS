@@ -33,7 +33,8 @@ SECRET_KEY = env("DJANGO_SECRET_KEY")
 DEBUG = env.bool("DJANGO_DEBUG", default=False)
 
 ALLOWED_HOSTS = [
-    "jumemegawears.com"
+    "jumemegawears.com",
+    "www.jumemegawears.com",
     "localhost",
     "127.0.0.1",
 ]
