@@ -14,43 +14,55 @@ from django.contrib.auth import get_user_model
 from nysc.models import Measurement
 from django.db.models import Count, Sum
 from payment.attatch_mail import payment_completed
-
+import logging
+from django.contrib import messages
+from django.db import transaction
 # Create your views here.
 
+logger = logging.getLogger(__name__)
 
 @login_required
 def order_create(request):
     cart = Cart(request)
-    form = OrderCreateForm()  # Initialize form outside the request method check
+    form = OrderCreateForm()
 
     if request.method == "POST":
-        form = OrderCreateForm(request.POST)  # Re-initialize form with POST data
+        form = OrderCreateForm(request.POST)
         if form.is_valid():
-            order = form.save()
-            current_user = request.user
             try:
-                measurement = Measurement.objects.get(user=current_user)
-            except Measurement.DoesNotExist:
-                measurement = None
+                with transaction.atomic():
+                    order = form.save()
+                    current_user = request.user
+                    try:
+                        measurement = Measurement.objects.get(user=current_user)
+                    except Measurement.DoesNotExist:
+                        logger.warning(f"Measurement not found for user {current_user.id}")
+                        measurement = None
 
-            for item in cart:
-                order_item_data = {
-                    "order": order,
-                    "product": item["product"],
-                    "price": item["price"],
-                    "quantity": item["quantity"],
-                    "user": current_user,
-                }
-                if measurement:
-                    order_item_data["measurement_id"] = measurement.id
+                    for item in cart:
+                        order_item_data = {
+                            "order": order,
+                            "product": item["product"],
+                            "price": item["price"],
+                            "quantity": item["quantity"],
+                            "user": current_user,
+                        }
+                        if measurement:
+                            order_item_data["measurement_id"] = measurement.id
 
-                OrderItem.objects.create(**order_item_data)
+                        OrderItem.objects.create(**order_item_data)
 
-            cart.clear()
-            payment_completed(order.id)
-            request.session["order_id"] = order.id
-            return redirect(reverse("process"))
+                    cart.clear()
+                    payment_completed(order.id)
+                    request.session["order_id"] = order.id
 
+                return redirect(reverse("process"))
+            except Exception as e:
+                logger.error(f"Error creating order: {str(e)}")
+                messages.error(request, "An error occurred while processing your order. Please try again.")
+        else:
+            messages.error(request, "Please correct the errors in the form.")
+    
     return render(request, "create.html", {"cart": cart, "form": form})
 
 
