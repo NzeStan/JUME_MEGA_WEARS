@@ -37,6 +37,7 @@ ALLOWED_HOSTS = [
     "www.jumemegawears.com",
     "localhost",
     "127.0.0.1",
+    "ad93-197-210-84-77.ngrok-free.app",
 ]
 
 
@@ -153,9 +154,21 @@ USE_TZ = True
 STATIC_URL = "static/"
 STATICFILES_DIRS = [BASE_DIR / "static"]
 STATIC_ROOT = BASE_DIR / "staticfiles"
-STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+if DEBUG:
+    STATICFILES_STORAGE = "whitenoise.storage.CompressedStaticFilesStorage"
+else:
+    STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
+# Compressor settings
+COMPRESS_ROOT = BASE_DIR / "staticfiles"
+COMPRESS_ENABLED = env.bool("COMPRESS_ENABLED", default=True)
+COMPRESS_OFFLINE = env.bool("COMPRESS_OFFLINE", default=True)
 
+STATICFILES_FINDERS = [
+    "django.contrib.staticfiles.finders.FileSystemFinder",
+    "django.contrib.staticfiles.finders.AppDirectoriesFinder",
+    "compressor.finders.CompressorFinder",
+]
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
@@ -163,17 +176,6 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 # customuser
 AUTH_USER_MODEL = "accounts.CustomUser"
-
-# Compressor settings
-COMPRESS_ROOT = BASE_DIR / "staticfiles"
-
-COMPRESS_ENABLED = True
-
-STATICFILES_FINDERS = [
-    "django.contrib.staticfiles.finders.FileSystemFinder",
-    "django.contrib.staticfiles.finders.AppDirectoriesFinder",
-    "compressor.finders.CompressorFinder",
-]
 
 # django-allauth config
 SITE_ID = 1
@@ -189,8 +191,8 @@ ACCOUNT_SIGNUP_PASSWORD_ENTER_TWICE = False
 ACCOUNT_AUTHENTICATION_METHOD = "email"
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_UNIQUE_EMAIL = True
-# Email backend
 
+# Email backend
 if DEBUG:
     EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 else:

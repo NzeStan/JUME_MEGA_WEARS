@@ -6,7 +6,7 @@
         class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Back</button>
 </a>
 
-<div class="flex flex-col items-center">
+<div class="flex flex-col items-center mt-4">
 
     {% if inspo.inspo %}
     <img src="{{ inspo.inspo.url }}" class="rounded-[2rem] w-full h-full object-cover" alt="inspo_details">
@@ -25,19 +25,7 @@
 </a>
 {% endif %}
 </div>
-<br>
-<br>
-<br>
-<br>
 
-<script>
-    function sendWhatsAppMessage(imageUrl) {
-        var phoneNumber = "+2348139425458"; // Replace with your phone number
-        var defaultText = "Thank you for contacting Jume Mega wears & Accessories. For all your unisex wears we have got you covered. --Quality is our Watch World--\n"; // Include newline character directly in the string
-        var message = defaultText + imageUrl;
-        window.location.href = "https://wa.me/" + phoneNumber + "/?text=" + encodeURIComponent(message);
-    }
-</script>
 {% endblock content %}
 
 {% block absolute_links %}

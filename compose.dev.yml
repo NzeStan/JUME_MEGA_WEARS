@@ -1,0 +1,5 @@
+services:
+  web:
+    command: ./entrypoint.sh
+    env_file:
+      - .env.dev # Use development environment variables

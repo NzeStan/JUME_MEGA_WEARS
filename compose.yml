@@ -1,7 +1,6 @@
 services:
     web:
         build: .
-        command: gunicorn JMW.wsgi -b 0.0.0.0:8000
         volumes:
             - .:/code
         ports:

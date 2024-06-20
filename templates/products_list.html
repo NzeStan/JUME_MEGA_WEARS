@@ -2,14 +2,14 @@
 
 {% block content %}
 
-<div class="grid grid-auto-fit justify-between justify-items-center gap-4">
+<div class="grid grid-auto-fit justify-between justify-items-center gap-4 mb-8">
     {% for product in products %}
     {% if product.available %}
     <a href="{{product.get_absolute_url}}">
         <div
             class=" w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
 
-            <img class="p-8 rounded-t-lg" src="{{product.image.url}}" alt="product image" />
+            <img class="p-8 rounded-t-lg object-cover h-80 w-full" src="{{product.image.url}}" alt="product image" />
 
             <div class="px-5 pb-5">
                 <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{product.name}}</h5>
