@@ -37,7 +37,7 @@ ALLOWED_HOSTS = [
     "www.jumemegawears.com",
     "localhost",
     "127.0.0.1",
-    "ad93-197-210-84-77.ngrok-free.app",
+    "d0a3-102-90-42-60.ngrok-free.app"
 ]
 
 
