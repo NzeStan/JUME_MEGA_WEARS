@@ -8,9 +8,6 @@ from django.contrib.admin.views.decorators import staff_member_required
 from django.http import HttpResponse
 from django.template.loader import render_to_string
 import weasyprint
-from django.views.generic.edit import UpdateView
-from django.urls import reverse_lazy
-from django.contrib.auth import get_user_model
 from nysc.models import Measurement
 from django.db.models import Count, Sum
 from payment.attatch_mail import payment_completed
